@@ -119,19 +119,17 @@ function handleClick() {
     // createIllustration({ numNodes: 100, numLinks: 0 }, true);
     console.log('clickCount should be 0', clickCount);
     showNode2();
-  }
-  if (clickCount === 1) {
     showLink();
   }
-  if (clickCount === 2) {
+  if (clickCount === 1) {
     // hideNode2();
     // hideLink();
     animate();
   }
-  if (clickCount === 3) {
+  if (clickCount === 2) {
   }
 
-  if (clickCount === 4) {
+  if (clickCount === 3) {
     clickCount = -1;
 
   }

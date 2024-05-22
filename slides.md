@@ -168,7 +168,7 @@ let's walk through each step of the transformer model at a macro level, using th
 
 ----
 
-"The quick brown fox"
+"The power clapper"
 
 Note:
 
@@ -224,49 +224,39 @@ We get an output of 1 word. In this case,
 ----
 
 
-"jumps"
+
 
 Note:
-jumps.
+went
 
 ----
 
 <span class="fragment fade-in-then-semi-out" data-fragment-index="0"> The initial input  </span>
 <span class="fragment fade-in-then-semi-out" data-fragment-index="2"> and the output  </span>
 
-<span class="fragment" data-fragment-index="1"> "The quick brown fox"  </span>
-<span class="fragment" data-fragment-index="3"> + "jumps"  </span>
+<span class="fragment" data-fragment-index="1"> "The power clapper"  </span>
+<span class="fragment" data-fragment-index="3"> + "went  </span>
+<span class="fragment" data-fragment-index="5">straight</span>
+<span class="fragment" data-fragment-index="7">to</span>
+<span class="fragment" data-fragment-index="9">jial"</span>
 
-<span class="fragment" data-fragment-index="4"> are fed back in.  </span>
-Note:
-Let's start high level.
-"The quick brown fox".
-----
 
-repeat
-
-----
-
-"the quick brown fox"
-<span class="fragment" data-fragment-index="1"> + </span>
-<span class="fragment" data-fragment-index="2">"jumps</span>
-<span class="fragment" data-fragment-index="3">over</span>
-<span class="fragment" data-fragment-index="4">the</span>
-<span class="fragment" data-fragment-index="5">lazy</span>
-<span class="fragment" data-fragment-index="6">dog"</span>
+<span class="fragment fade-in-then-out" data-fragment-index="4">are fed back in. </span>
+<span class="fragment fade-in-then-out" data-fragment-index="6">are fed back in. </span>
+<span class="fragment fade-in-then-out" data-fragment-index="8">are fed back in. </span>
 
 Note:
 Let's start high level.
-"The quick brown fox".
+"The power clapper".
 
 input layer:
 Each word gets converted to a series of numbers.
 
 
 output layer:
-   - The transformer predicts the most likely next word based on the processed input. Let's say it predicts "jumps".
+   - The transformer predicts the most likely next word based on the processed input. Let's say it predicts "straight".
    ----
-   - The predicted word is added to the sequence: "The quick brown fox jumps".
+   - The predicted word is added to the sequence: "The power clapper".
    ----
    - The process repeats, with each new word influencing subsequent predictions.
 
@@ -291,26 +281,26 @@ output layer:
 
 Note:
   n_vocab=0
-    this is the number of unique words in the dataset
+    this is the number of unique words in the dataset.
     and determines the size of the input embeddings
     the number of tokens in the input sequence
 
   n_ctx=1024
-    the maximum number of tokens in the context window
-    determines the number of positions in the positional encoding
+    the maximum number of tokens in the context window.
+    determines the number of positions in the positional encoding.
 
   n_embd=768
-    the number of elements per embedding
+    the number of elements (dimensions) per embedding.
 
   n_head=12
     the number of attention heads in each layer
     this is the number of times the model will split the input sequence
-    and calculate attention weights
+    and calculate attention weights.
 
   n_layer=12
-    the number of transformer layers
+    the number of transformer layers.
     this is the number of times the model will apply the transformer
-    to the input sequence
+    to the input sequence.
 
 
 –––––––––––––––––––––––––––––––––––––––––––––––
@@ -319,18 +309,17 @@ Let's go through that step by step.
 
 –––––––––––––––––––––––––––––––––––––––––––––––
 
-"The quick brown fox"
+"The power clapper"
 
+"The":
 
-"quick": [ 3.249, 0.713, 1.687 ] <!-- .element: class="fragment fade-up" data-fragment-index="1" -->
+"power": [ 3.249, 0.713, 1.687 ] <!-- .element: class="fragment fade-up" data-fragment-index="1" -->
 
-"brown": [ 0.147, 2.198, -0.589 ] <!-- .element: class="fragment fade-up" data-fragment-index="2" -->
-
-"fox": [ 4.875, -1.434, 2.302 ] <!-- .element: class="fragment fade-up" data-fragment-index="3" -->
+"clapper": [ 0.147, 2.198, -0.589 ] <!-- .element: class="fragment fade-up" data-fragment-index="2" -->
 
 Note:
 INSERT THE array values in this slide
-   - The input is split into tokens: "The", "quick", "brown", "fox".
+   - The input is split into tokens: "The", "power", "clapper",
    ----
    - Each token is mapped to its corresponding embedding vector, which is just a fancy way of saying an array of numbers.
 
@@ -345,13 +334,13 @@ INSERT THE array values in this slide
 
   [ 0.147, 2.198, -0.589 ],
 
-  [ 4.875, -1.434, 2.302 ]
 }
 
 Note:
 combine this slide with the slide below.
 slide in the selfAttentionMechanism() function from the left if possible
 
+[ 4.875, -1.434, 2.302 ]
 
 –––––––––––––––––––––––––––––––––––––––––––––––
 
@@ -362,10 +351,11 @@ selfAttentionMechanism([ 3.249, 0.713, 1.687 ])<!-- .element: class="fragment fa
 
 selfAttentionMechanism([ 0.147, 2.198, -0.589 ])<!-- .element: class="fragment fade-up" data-fragment-index="2" -->
 
-selfAttentionMechanism([ 4.875, -1.434, 2.302 ])<!-- .element: class="fragment fade-up" data-fragment-index="3" -->
 
 note:
    - Each element in one array is evaluated against each element in every other array.
+
+selfAttentionMechanism([ 4.875, -1.434, 2.302 ])<!-- .element: class="fragment fade-up" data-fragment-index="3" -->
 
 –––––––––––––––––––––––––––––––––––––––––––––––
 
