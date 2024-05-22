@@ -1,99 +1,278 @@
 ---
 title: Neural Networks and Transformers
-# theme: solarized
 revealOptions:
   transition: 'slide'
 ---
 
-<!-- #### Neural Networks
- *and*
-#### Transformers -->
+<!-- .slide: data-background-image="assets/sponsorSlide1start_dark_highres.png" -->
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
 #### Neural Networks and Transformers
 
-*An introduction*
+_An introduction_
+
+<div style="position: fixed; width: 100%; font-size: 0.4em">
+<p>by Keith Gibson</p>
+</div>
 
 Note:
 Welcome to this tech talk on neural networks and transformers.
 
 Today, I'm hoping to provide a baseline understanding of these concepts. As such, I'll be erring on the side of simplification.
 
-We'll start with neural network broadly followed by the key characteristics of the transformer, the fundamental neural network architecture of today's most advanced language models, including the GPT series and the chatbot ChatGPT.
+We'll start with neural networks broadly, followed by the key characteristics of the transformer, the fundamental neural network architecture of today's most advanced language models, including the GPT series and the chatbot ChatGPT.
 
----
+–––––––––––––––––––––––––––––––––––––––––––––––
 
 So...what is a Neural Network?
 
 Note:
-So, what is a neural network?
+Well, let's start by being more precise and instead ask -
 
-Well, let's start by being more precise and instead ask, what is an *artificial* neural network?
+# down
 
-I think more precision is helpful because an 'artificial' neural network inspired by another neural network. That is, the biological one, in the brain.
+----
 
-Which we have some familiarity with.
-
-But, let's start with an overview.
-
-A biological neural network is an interconnected system of - you guessed it - neurons.
-
-But in a vacuum -
-
----
-<!-- .slide: data-background-iframe="http://localhost:5000/" -->
+What's an *Artificial* Neural Network?
 
 Note:
-on its own, what what meaning does one lone neuron have? What can it accomplish?
+What's an *Artificial* Neural Network?
+
+I think more precision is helpful because an 'artificial' neural network is inspired by and roughly designed after another kind of neural network. That is, the biological one, in the brain.
+
+## EDIT: say more here about the overlap between the biological and artificial neural networks, or find a better transition.
+
+Both are networks of interconnected - you guessed it - neurons
+# down
+
+----
+
+Note:
+/take a beat
+
+But on its own
+
+# down
+
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+<!-- .slide: data-background-color="#2c2c2c"-->
+<!-- .slide: data-preload data-background-interactive data-background-iframe="interactive.html"-->
+
+<table class="fragment" data-fragment-index="1">
+  <tr>
+    <th class="fragment" data-fragment-index="1">Biological</th>
+    <th class="fragment" data-fragment-index="3">Artificial</th>
+  </tr>
+  <tr>
+    <td class="fragment" data-fragment-index="2">synapse</td>
+    <td class="fragment" data-fragment-index="4">dimension</td>
+  </tr>
+  <tr>
+    <td class="fragment" data-fragment-index="5">signal</td>
+    <td class="fragment" data-fragment-index="6">value</td>
+  </tr>
+</table>
+
+Note:
+in a vacuum, what value does one neuron have? What can it accomplish?
+
 Well, none, nothing.
 
-/ click
+It is only in _relation_
 
-It is only in *relation* to other neurons,
+# click
 
-only when *connected* to other neurons,
+to other neurons,
 
-that it can take on meaning, that it can accomplish something.
+only when _connected_
 
-This connection between neurons is called a synapse.
+# click
 
-It takes the form of a chemical or electrical signal that, when fired, then causes another neuron to fire. And another, and another. Until you get a network that might vaguely be resembled by something like, this:
+to other neurons,
 
-/click
+that it can take on value, that it can accomplish something.
 
----
+Maybe a network of neurons in relationship with one another
 
-So...that's the biological neural network.
-What about the artificial neural network?
+In biological networks, this connection between neurons is called a synapse. It takes the form of a chemical or electrical signal.
+In artificial networks, we can liken this connection to what is called a dimension. Which is to say, a number. The value of the number is equivalent to the synapse's signal.
+
+
+# click
+
+help: fact check and clarify the above
+
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+And how do they work, roughly?
+
+----
+1. Input received, converted
+
+  B: sensory input => chemical or electrical signal  <!-- .element: class="fragment fade-up" data-fragment-index="1" -->
+
+  A: text => tokens => dimensions <!-- .element: class="fragment fade-up" data-fragment-index="2" -->
+
+----
+2. Input processed through successive layers
+
+A:
+<span class="fragment fade-up-then-out" data-fragment-index="1"> layer<sup>n output</sup> => layer<sup>n+1 output</sup>  </span>
+
+<span class="fragment fade-up-then-semi-out" data-fragment-index="2"> layer<sup>n+1 output</sup> => layer<sup>n+2 input</sup>  </span>
+
+<span class="fragment fade-up-then-semi-out" data-fragment-index="3"> layer<sup>n+2 output</sup> => layer<sup>n+3 input</sup>  </span>
+
+<span class="fragment fade-up" data-fragment-index="4"> etc. </span>
+
+----
+3. Output produced
+
+B: conscious thought / involuntary action<!-- .element: class="fragment fade-up" data-fragment-index="1" -->
+
+A: token<!-- .element: class="fragment fade-up" data-fragment-index="2" -->
 
 Note:
-So...that's the biological neural network.
-What about the artificial neural network?
+In the biological network,
+1.
+Input is received and converted into a form that can be processed
+  - sensory input is converted to a chemical or electrical signal.
+  - text is converted to dimensions
 
----
+2.
+That input is processed through successive layers of neurons.
+Each layer's output is the next layer's input.
+
+help: biological examples between the initial touch and the conscious thought of being touchéd. would the subconscious layer be involved here or is that too slow for this sort of processing?
+
+  The final intermediary layer might be the brain's subconscious processes, working behind the scenes to interpret and analyze information.
+
+3.
+The output is produced.
+  Conscious thoughts or involuntary actions.
+  Artificial: a token is predicted
+
+–––––––––––––––––––––––––––––––––––––––––––––––
 
 Okay. What's a Transformer?
 
----
-## Font Awesome
+Note: a transformer is a neural network, with the general architecture I just described. The difference between transformers and other text-centric neural networks is in how they process information in the intermediate layers.
 
-*  Itym One<!-- .element: class="mdfa fa-info-circle"--> (this is a feature test in a very long item)
-*  Itym Two<!-- .element: class="mdfa fa-question-circle"-->
-*  Itym Three<!-- .element: class="mdfa fa-exclamation-circle"-->
-*  Itym 4<!-- .element: class="mdfa fa-exclamation-triangle"-->
-with forced line break!
+–––––––––––––––––––––––––––––––––––––––––––––––
+Chatbot example
 
---
+Note:
+let's walk through each step of the transformer model at a macro level, using the example of a chatbot powered by GPT-2, which was released in 2018.
 
-## Fragments
+----
 
----
+"The quick brown fox"
 
-## Dont reveal all at once!
+Note:
 
-- Item 1 <!-- .element: class="fragment" data-fragment-index="2" -->
-- Item 2 <!-- .element: class="fragment" data-fragment-index="1" -->
-- Item 3 <!-- .element: class="fragment" data-fragment-index="3" -->
 
----
+----
+
+input layer:
+
+the input text is converted into numbers <!-- .element: class="fragment" data-fragment-index="1" -->
+
+Note:
+
+----
+
+intermediate layer n<sup>0</sup>:
+
+the numbers from the input layer are processed<!-- .element: class="fragment" data-fragment-index="1" -->
+
+and fed to the subsequent layer, n<sup>1</sup> <!-- .element: class="fragment" data-fragment-index="2" -->
+
+
+Note:
+test
+
+----
+
+intermediate layer n<sup>1</sup>:
+
+<span class="fragment" data-fragment-index="1"> the numbers from the prior intermediate layer are processed </span>
+
+<span class="fragment" data-fragment-index="2"> and fed to the subsequent layer, n<sup>2</sup> </span>
+
+Note:
+test
+
+----
+
+and so on
+
+Note:
+
+----
+
+output layer:
+
+the numbers from the final intermediate layer are used to predict a word.<!-- .element: class="fragment" data-fragment-index="1" -->
+
+Note:
+
+
+We get an output of 1 word. In this case,
+
+----
+
+
+"jumps"
+
+Note:
+jumps.
+
+----
+
+<span class="fragment fade-in-then-semi-out" data-fragment-index="0"> The initial input  </span>
+<span class="fragment fade-in-then-semi-out" data-fragment-index="2"> and the output  </span>
+
+<span class="fragment" data-fragment-index="1"> "The quick brown fox"  </span>
+<span class="fragment" data-fragment-index="3"> + "jumps"  </span>
+
+<span class="fragment" data-fragment-index="4"> are fed back in.  </span>
+Note:
+Let's start high level.
+"The quick brown fox".
+----
+
+repeat
+
+----
+
+"the quick brown fox"
+<span class="fragment" data-fragment-index="1"> + </span>
+<span class="fragment" data-fragment-index="2">"jumps</span>
+<span class="fragment" data-fragment-index="3">over</span>
+<span class="fragment" data-fragment-index="4">the</span>
+<span class="fragment" data-fragment-index="5">lazy</span>
+<span class="fragment" data-fragment-index="6">dog"</span>
+
+Note:
+Let's start high level.
+"The quick brown fox".
+
+input layer:
+Each word gets converted to a series of numbers.
+
+
+output layer:
+   - The transformer predicts the most likely next word based on the processed input. Let's say it predicts "jumps".
+   ----
+   - The predicted word is added to the sequence: "The quick brown fox jumps".
+   ----
+   - The process repeats, with each new word influencing subsequent predictions.
+
+
+–––––––––––––––––––––––––––––––––––––––––––––––
 
 ## GPT-2
 ```py [1|1,3|1,4|1,5|1,6|1,7|1,3-7]
@@ -106,7 +285,7 @@ with forced line break!
         n_layer=12,
     )
 ```
-
+<br>
 <div style="position: fixed; width: 100%; font-size: 0.4em">
   <a href="https://github.com/openai/gpt-2/blob/master/src/model.py">GPT-2 on Github</a>
 </div>
@@ -135,19 +314,199 @@ Note:
     to the input sequence
 
 
----
+–––––––––––––––––––––––––––––––––––––––––––––––
 
 
-## Being subtle
+Let's go through that step by step.
 
-* Point a
-<span style="color: red; font-size: 0.5em"> (but that is not important)</span>
-* Point b
+–––––––––––––––––––––––––––––––––––––––––––––––
 
----
 
-## Images
 
-![](https://assets.amuniversal.com/0e1eaf909fcf012f2fe600163e41dd5b)
+"The quick brown fox"
 
+"The": [0.91, 0.28, 0.53] <!-- .element: class="fragment" data-fragment-index="0" -->
+
+"quick": [0.24, 0.71, 0.67] <!-- .element: class="fragment" data-fragment-index="1" -->
+
+"brown": [0.47, 0.18, 0.59] <!-- .element: class="fragment" data-fragment-index="2" -->
+
+"fox": [0.87, 0.44, 0.30] <!-- .element: class="fragment" data-fragment-index="3" -->
+
+Note:
+   - The input is split into tokens: "The", "quick", "brown", "fox".
+   ----
+   - Each token is mapped to its corresponding embedding vector, which is just a fancy way of saying an array of numbers.
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+{
+
+  [0.91, 0.28, 0.53],
+
+  [0.24, 0.71, 0.67],
+
+  [0.47, 0.18, 0.59],
+
+  [0.87, 0.44, 0.30]
+
+}
+
+Note: that leaves us with something like this:
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+
+lotsOfMathSomeOfWhichIsVeryBasic([0.91, 0.28, 0.53])
+
+lotsOfMathSomeOfWhichIsVeryBasic([0.24, 0.71, 0.67])<!-- .element: class="fragment" data-fragment-index="1" -->
+
+lotsOfMathSomeOfWhichIsVeryBasic([0.47, 0.18, 0.59])<!-- .element: class="fragment" data-fragment-index="2" -->
+
+lotsOfMathSomeOfWhichIsVeryBasic([0.87, 0.44, 0.30])<!-- .element: class="fragment" data-fragment-index="3" -->
+
+note:
+   - Each element in one array is evaluated against each element in every other array.
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+[
+
+  [0.13, 0.64, 0.82],
+
+  [0.75, 0.39, 0.11],
+
+  [0.95, 0.58, 0.26],
+
+  [0.49, 0.92, 0.61]
+
+]
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+repeat for each intermediary layer
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+predictionAlgorithm(lastIntermediateLayerOutputArray)
+
+"jumps" <!-- .element: class="fragment" data-fragment-index="1" -->
+
+Note:
+
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+repeat
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+a few more slides to go
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+@keithgibson
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+Text Generation Step 2
+
+2. Self-Attention and Multi-Head Attention:
+   - The embeddings pass through the self-attention mechanism.
+   ----
+
+   - Multiple attention heads analyze different aspects simultaneously.
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+Text Generation Step 3
+
+3. Feedforward Networks and Positional Encoding:
+   - The output from the attention mechanisms is refined by feedforward networks.
+   ----
+   - Positional information is added to preserve the order of the tokens.
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+Text Generation Step 4
+
+4. Text Generation:
+
+
+Tokenization and Embeddings
+
+- Input text is broken down into tokens
+----
+- Each token is mapped to an embedding vector
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+Self-Attention Mechanism (SAM)
+
+- Core of transformer's parallel processing
+----
+- Each word is processed in context of every other word
+----
+- Like a conversation where you recall every word spoken
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+Multi-Head Self-Attention
+
+- Multiple attention "heads" per layer
+----
+- Each head focuses on different aspects of input
+----
+- Heads work in parallel to analyze input from different perspectives
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+Feedforward Networks (FFNs)
+
+- Additional layers of processing
+----
+- Each node's output from self-attention is independently transformed
+----
+- Similar to how brain regions refine sensory input
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+Positional Encoding
+
+- Adds information about word position
+----
+- Ensures model understands word order
+----
+- Crucial for meaning
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+Transformer Outcomes
+
+- Coherent and contextually appropriate text generation
+----
+- Engaging conversations
+----
+- Creative fiction writing
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+Conclusion
+
+- Explored neural networks and transformers
+----
+- Biological inspiration for artificial neural networks
+----
+- Transformer architecture and innovative components
+----
+- Text generation example showcasing transformers' capabilities
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+Future Potential
+
+- Drawing inspiration from human brain
 --
+- Transformers as a significant leap forward
+--
+- Pushing boundaries and exploring novel architectures
+--
+- Building models rivaling human complexity and creativity
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+<!-- .slide: data-background-image="assets/sponsorSlide2end_dark_highres.png" -->
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+Works Cited

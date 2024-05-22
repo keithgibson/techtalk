@@ -2,15 +2,26 @@
 <html>
 
 <head>
-    <title>Neural Network Visualization</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <!-- Include Zdog library -->
-    <script src="https://unpkg.com/zdog@1/dist/zdog.dist.min.js"></script>
+  <title>Neural Network Visualization</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <!-- Include Zdog library -->
+  <script src="https://unpkg.com/zdog@1/dist/zdog.dist.min.js"></script>
 </head>
+
 <body>
   <canvas id="zdog-canvas"></canvas>
-  <!-- <script type="module" src="neuralNetworkAnimation.js"></script> -->
+  <!-- <script>
+    const pathname = window.location.pathname;
+    console.log('pathname:', pathname);
+
+    const searchParams = new URLSearchParams(window.location.search);
+    for (const [key, value] of searchParams) {
+      console.log(`search param: ${key} = ${value}`);
+    }
+
+  </script> -->
   <script src="bundle.js"></script>
 
 </body>
+
 </html>

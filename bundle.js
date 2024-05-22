@@ -4332,7 +4332,7 @@
 
 
 	const YELLOW = '#EBCB8B';
-	const GREY_LIGHT$1 = '#D0D6E1';
+	const GREY_LIGHT = '#D0D6E1';
 	const BLINK_DURATION = 70;
 	let TICKS = 0;
 
@@ -4357,10 +4357,10 @@
 	  render() {
 	    if (!this._renderable) {
 	      this._renderable = new jsExports.Ellipse({
-	        addTo: ILLO$1,
+	        addTo: ILLO,
 	        diameter: 0,
 	        stroke: 8,
-	        color: GREY_LIGHT$1 + 'dd',
+	        color: GREY_LIGHT + 'dd',
 	      });
 	    }
 
@@ -4409,13 +4409,13 @@
 	  render() {
 	    if (!this._renderable) {
 	      this._renderable = new jsExports.Shape({
-	        addTo: ILLO$1,
+	        addTo: ILLO,
 	        path: [
 	          { ...this.source.position },
 	          { ...this.target.position },
 	        ],
 	        stroke: 1,
-	        color: GREY_LIGHT$1 + '16',
+	        color: GREY_LIGHT + '16',
 	      });
 	    }
 
@@ -4455,13 +4455,13 @@
 	      if (this._blinkRenderable) {
 	        this._renderable.removeChild(this._blinkRenderable);
 	        this._blinkRenderable = null;
-	        this._renderable.color = GREY_LIGHT$1 + '16';
+	        this._renderable.color = GREY_LIGHT + '16';
 	      }
 	    }
 	  }
 	}
 
-	const ILLO$1 = new jsExports.Illustration({
+	const ILLO = new jsExports.Illustration({
 	  element: '#zdog-canvas',
 	  dragRotate: true,
 	  resize: true,
@@ -4522,37 +4522,6 @@
 	forceSimulation(NODES, 1.5)
 	  .force("link", forceLink(LINKS).id(d => d.id))
 	  .force("charge", forceManyBody());
-
-	// Update & render
-	function animate(stopAnimation = false) {
-	  if (stopAnimation) {
-	    console.log('stopAnimation = true');
-	    location.reload();
-	    return;
-	  }
-
-	  // Each update is one tick
-	  TICKS++;
-
-	  // Update the rendering for nodes and links
-	  NODES.forEach(node => node.render());
-	  LINKS.forEach(link => {
-	    link.render();
-
-	    // Small chance to randomly blink each link
-	    if (Math.random() > 0.9995) {
-	      link.blink();
-	    }
-	  });
-
-	  // Rotate the whole illustration slowly
-	  ILLO$1.rotate.y += 0.0001;
-	  ILLO$1.rotate.x += 0.0002;
-	  ILLO$1.rotate.z += 0.00015;
-
-	  ILLO$1.updateRenderGraph();
-	  requestAnimationFrame(() => animate(stopAnimation));
-	}
 
 
 	// // Converts an alpha value [0,1] to a hex string
@@ -4625,154 +4594,16 @@
 	    // ILLO.rotate.y += rotationSpeed.y;
 	    // ILLO.rotate.x += rotationSpeed.x;
 	    // ILLO.rotate.z += rotationSpeed.z;
-	    ILLO$1.rotate.y += 0.0001;
-	    ILLO$1.rotate.x += 0.0002;
-	    ILLO$1.rotate.z += 0.00015;
+	    ILLO.rotate.y += 0.0001;
+	    ILLO.rotate.x += 0.0002;
+	    ILLO.rotate.z += 0.00015;
 
-	    ILLO$1.updateRenderGraph();
+	    ILLO.updateRenderGraph();
 	    requestAnimationFrame(() => animate());
 	  }
 	  animate();
 	}
 
-	const GREY_LIGHT = "#D0D6E1";
-
-	// Create a new Zdog illustration
-	const ILLO = new jsExports.Illustration({
-	  element: "#zdog-canvas",
-	  dragRotate: true,
-	  resize: true,
-	  onResize: function (width, height) {
-	    let minSize = Math.min(width, height);
-	    this.zoom = minSize / 300;
-	  },
-	});
-
-	// Define the node properties
-	const NODE_DIAMETER = 0;
-	const NODE_STROKE = 8;
-	const NODE_COLOR = GREY_LIGHT + "dd";
-
-	// Define the link properties
-	const LINK_STROKE = 1.5;
-	const LINK_COLOR = GREY_LIGHT + "30";
-
-	// Create the first node
-	const NODE1 = new jsExports.Ellipse({
-	  addTo: ILLO,
-	  diameter: NODE_DIAMETER,
-	  stroke: 0,
-	  color: NODE_COLOR,
-	  translate: {
-	    x: (Math.random() * 100 - 100) - 30,
-	    y: (Math.random() * 100 - 100) - 30,
-	    z: (Math.random() * 100 - 100) - 30,
-	  },
-	});
-
-	// Create the second node
-	const NODE2 = new jsExports.Ellipse({
-	  addTo: ILLO,
-	  diameter: NODE_DIAMETER,
-	  stroke: 0,
-	  color: NODE_COLOR,
-	  translate: {
-	    x: (Math.random() * 100 - 50) - 60,
-	    y: (Math.random() * 100 - 50) - 10,
-	    z: (Math.random() * 100 - 50) - 60,
-	  },
-	});
-
-	// Create the link between the nodes
-	const LINK = new jsExports.Shape({
-	  addTo: ILLO,
-	  path: [
-	    { x: NODE1.translate.x, y: NODE1.translate.y, z: NODE1.translate.z },
-	    { x: NODE2.translate.x, y: NODE2.translate.y, z: NODE2.translate.z },
-	  ],
-	  stroke: 0,
-	  color: LINK_COLOR + "00",
-	});
-
-	// Define the animation loop
-	function animateNode(stopAnimation = false) {
-
-	  // Rotate the whole illustration slowly
-	  rotate();
-
-	  ILLO.updateRenderGraph();
-	  // requestAnimationFrame(animateNode);
-	  requestAnimationFrame(() => animateNode(stopAnimation));
-
-	}
-
-	function rotate() {
-	  ILLO.rotate.y += 0.001;
-	  ILLO.rotate.x += 0.001;
-	  ILLO.rotate.z += 0.001;
-	}
-
-	// Function to show the link
-	function showLink() {
-	  LINK.stroke = LINK_STROKE;
-	  LINK.color = LINK_COLOR;
-	}
-
-	function hideLink() {
-	  LINK.stroke = 0;
-	  LINK.color = LINK_COLOR;
-	}
-
-	function showNode1() {
-	  NODE1.stroke = NODE_STROKE;
-	  NODE1.color = NODE_COLOR;
-	}
-
-	function showNode2() {
-	  NODE2.stroke = NODE_STROKE;
-	  NODE2.color = NODE_COLOR;
-	}
-
-	function hideNode2() {
-	  NODE2.stroke = 0;
-	  NODE2.color = NODE_COLOR;
-	}
-
-
-	let clickCount = 0;
-	function handleClick() {
-	  clickCount++;
-	  // console.log('clickCount = ' + clickCount);
-	  if (clickCount === 1) {
-	    // createIllustration({ numNodes: 100, numLinks: 0 }, true);
-	    animateNode();
-	  }
-	  if (clickCount === 2) {
-	    showNode1();
-
-	  }
-	  if (clickCount === 3) {
-	    showNode2();
-
-	  }
-	  if (clickCount === 4) {
-	    showLink();
-	  }
-
-	  if (clickCount === 5) {
-	    hideNode2();
-	    hideLink();
-	    animate();
-	    clickCount = 0;
-	  }
-
-	}
-
-	// Start the animation
 	createIllustration({ numNodes: 100, numLinks: 0 });
-
-
-	// Add event listener to the page
-	document.addEventListener("click", handleClick);
 
 })();

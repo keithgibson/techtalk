@@ -1,8 +1,8 @@
 {
-  "controls": false,
-  "progress": false,
+  "controls": true,
+  "progress": true,
   "slideNumber": false,
-  "hideCursorTime": 1000,
+  "hideCursorTime": 250,
   "hideCursorTime_comment": "Enable support for hiding the cursor after a period of time"
 
 }
