@@ -195,36 +195,40 @@ lets say we get -
 
 ----
 
-<span class="fragment" data-fragment-index="1"> The power clap per + </span>
-went
-<span class="fragment" data-fragment-index="3">straight</span>
-<span class="fragment" data-fragment-index="5">to</span>
-<span class="fragment" data-fragment-index="7">jial</span>
+"went"
 
-<span class="fragment fade-in-then-out" data-fragment-index="2">are fed back in. </span>
-<span class="fragment fade-in-then-out" data-fragment-index="4">are fed back in. </span>
-<span class="fragment fade-in-then-out" data-fragment-index="6">are fed back in. </span>
 
 Note:
 "went"
 
-# down
+----
 
+<span class="fragment" data-fragment-index="1"> "The power clapper"  </span>
+<span class="fragment" data-fragment-index="2"> + "went  </span>
+<span class="fragment" data-fragment-index="4">straight</span>
+<span class="fragment" data-fragment-index="6">to</span>
+<span class="fragment" data-fragment-index="8">jial"</span>
+
+<span class="fragment fade-in-then-out" data-fragment-index="3">are fed back in. </span>
+<span class="fragment fade-in-then-out" data-fragment-index="5">are fed back in. </span>
+<span class="fragment fade-in-then-out" data-fragment-index="7">are fed back in. </span>
+
+Note:
 the initial input
-# down
+# click
 and the output
-# down
+# click
 are fed back in.
 
 The process repeats, with each new word influencing subsequent predictions.
 
-# down
+# click
 (straight)
 are fed back in.
-# down
+# click
 (to)
 are fed back in.
-# down
+# click
 (jial)
 
 –––––––––––––––––––––––––––––––––––––––––––––––
@@ -317,196 +321,7 @@ embeddings:
 embeddings:
 
 "The":<!-- .element: class="fragment fade-up-then-out" data-fragment-index="3" -->
-<div style="font-size: 0.1em" id="arrayContainer">
-  <!-- The array of numbers will be inserted here by JavaScript -->
-</div>
-
-"power": [ 3.249, 0.713, 1.687 ] <!-- .element: class="fragment fade-up" data-fragment-index="4" -->
-
-"clap": [ 0.147, 2.198, -0.589 ] <!-- .element: class="fragment fade-up" data-fragment-index="5" -->
-
-"per": [ 0.673, 1.921, -2.096 ] <!-- .element: class="fragment fade-up" data-fragment-index="6" -->
-
-Note:
-if i were to say, "we convert the token to a dense vector representation using the embedding matrix", what might you think that means?
-
-# down
-
-What about if I said "we look up the array of numeric values for each token in a database"?
-
-It’s the same thing.
-
-
-INSERT THE array values in this slide
-   - The input is split into tokens: "The", "power", "clapper",
-   ----
-   - Each token is mapped to its corresponding embedding vector, which is just a fancy way of saying an array of numbers.
-
-
-----
-
-<div style="font-size: 0.5em">
-const embeddingsLayer1 = {
-
-  "The": [ -1.228, 0.733, -0.316 ],
-
-  "power": [ 3.249, 0.713, 1.687 ],
-
-  "clap": [ 0.147, 2.198, -0.589 ],
-
-  "per": [ 0.673, 1.921, -2.096 ]
-
-}</div>
-
-self-Attention Mechanism (sam)<!-- .element: class="fragment fade-up" data-fragment-index="1" -->
-
-sam(embeddingsLayer1["The"])<!-- .element: class="fragment fade-up" data-fragment-index="2" -->
-
-sam(embeddingsLayer1["power"])<!-- .element: class="fragment fade-up" data-fragment-index="3" -->
-
-sam(embeddingsLayer1["clap"])<!-- .element: class="fragment fade-up" data-fragment-index="4" -->
-
-sam(embeddingsLayer1["per"])<!-- .element: class="fragment fade-up" data-fragment-index="5" -->
-
-
-Note:
-   - Each array is evaluated against each other array, with the elements of each array adjusted as a result
-
-This is where we see the unique form of the transformer first come into play.
-
-Self-Attention Mechanism (SAM)
-
-- Each token is processed in context of every other token.
-- This allows the model to find strong relationships between parts of the input regardless of their position in the input sequence.
-
-- For humans, it's like having a long conversation where you recall every word spoken, and so can make connections between similar ideas regardless of when they took place.
-
-----
-
-Heads:
-
-<div style="font-size: 0.3em">
-const Head1 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="1" -->
-</div>
-
-<div style="font-size: 0.3em">
-const Head2 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="2" -->
-</div>
-
-<div style="font-size: 0.3em">
-const Head3 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="3" -->
-</div>
-
-<div style="font-size: 0.3em">
-const Head4 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="4" -->
-</div>
-
-<div style="font-size: 0.3em">
-etc. <!-- .element: class="fragment" data-fragment-index="5" -->
-</div>
-
-Note:
-in the case of gpt 2, that's 12 heads. So, 12 times per layer. And it happens in parallel.
-The values from each head are then synthesized into a single set of embeddings yet again.
-
-----
-
-repeat for each intermediate layer
-
-<span class="fragment fade-up-then-out" data-fragment-index="1">layer<sup>n output</sup> => layer<sup>n+1 output</sup>  </span>
-
-<span class="fragment fade-up-then-semi-out" data-fragment-index="2">layer<sup>n+1 output</sup> => layer<sup>n+2 input</sup>  </span>
-
-<span class="fragment fade-up-then-semi-out" data-fragment-index="3">layer<sup>n+2 output</sup> => layer<sup>n+3 input</sup>  </span>
-
-<span class="fragment fade-up" data-fragment-index="4">etc.</span>
-
-Note:
-in the case of gpt 2, that's 12 layers.
-
-----
-
-output layer:
-
-<span class="fragment fade-up-then-out" data-fragment-index="1">predictToken(embeddingsLayer<sup>n final output</sup>) => </span>
-
-"went"<!-- .element: class="fragment" data-fragment-index="2" -->
-
-Note:
-we pass the final layer's output embeddings through a prediction function to get the most likely token.
-We get a 1 token output.
-In this case, we get
-# down
-
-"went"
-
-----
-
-repeat until we reach the context window limit
-
-Note: which in gpt 2 is 1024 tokens,
-
-but for our purposes we'll use 7.
-
-----
-
-Input:
-
-"The power clapper"
-
-Output:<!-- .element: class="fragment" data-fragment-index="1" -->
-
-"went straight to jial"<!-- .element: class="fragment" data-fragment-index="2" -->
-
-Note: which leaves us finally with the output of "went straight to jial"
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-if (output) {
-
-  return "end talk";
-
-}
-
-Note:
-Thank you everyone for your time.
-I hope you enjoyed the presentation and learned something new.
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-Works Cited
-<div style="width: 100%; font-size: 0.6em">
-  <a href="https://arxiv.org/abs/1706.03762">"Attention Is All You Need" by Vaswani et al. (transformer whitepaper)</a>
-</div>
-<div style="width: 100%; font-size: 0.6em">
-  <a href="https://github.com/openai/gpt-2/blob/master/src/model.py">GPT-2 on Github</a>
-</div>
-<div style="width: 100%; font-size: 0.6em">
-  <a href="https://arxiv.org/abs/2005.14165">"Language Models are Few-Shot Learners" by Wu et al.
-   (GPT-3 unofficial whitepaper)</a>
-</div>
-
-Note:
-here are my works cited
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-linkedin: @keithrgibson
-
-github: @keithgibson
-
-Note:
-you can find me here
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-<!-- .slide: data-background-image="assets/sponsorSlide2end_dark_highres.png" -->
-
-Note:
-And lastly, thank you again to Remake and the rest of our sponsors.
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-<!--
+<div style="font-size: 0.1em">
   [ -1.228084989880871, 0.7331303424681268, -0.31621513108079213, 3.1979479873077885,
   2.168531500398558, -0.24906143658303126, -1.5775041584541172, -2.5750147547274893,
   1.8264231424899657, 4.448246216443945, 4.616339993884374, -1.3465269175726058,
@@ -694,5 +509,188 @@ And lastly, thank you again to Remake and the rest of our sponsors.
   1.1323005742102836, 4.033599810095321, 3.4066255974841013, 3.446464428226861, 3.8875149774349094,
   0.8587225445839897, 4.490651509465419, 1.9132361931576902, -4.04632526265493, -3.810959202805988,
   -0.7528097432783909
-  ];
--->
+]</div> <!-- .element: class="fragment fade-up-then-out" data-fragment-index="3" -->
+
+"power": [ 3.249, 0.713, 1.687 ] <!-- .element: class="fragment fade-up" data-fragment-index="4" -->
+
+"clap": [ 0.147, 2.198, -0.589 ] <!-- .element: class="fragment fade-up" data-fragment-index="5" -->
+
+"per": [ 0.673, 1.921, -2.096 ] <!-- .element: class="fragment fade-up" data-fragment-index="6" -->
+
+Note:
+if i were to say, "we convert the token to a dense vector representation using the embedding matrix", what might you think that means?
+
+# down
+
+What about if I said "we look up the array of numeric values for each token in a database"?
+
+It’s the same thing.
+
+
+INSERT THE array values in this slide
+   - The input is split into tokens: "The", "power", "clapper",
+   ----
+   - Each token is mapped to its corresponding embedding vector, which is just a fancy way of saying an array of numbers.
+
+
+----
+
+<div style="font-size: 0.5em">
+const embeddingsLayer1 = {
+
+  "The": [ -1.228, 0.733, -0.316 ],
+
+  "power": [ 3.249, 0.713, 1.687 ],
+
+  "clap": [ 0.147, 2.198, -0.589 ],
+
+  "per": [ 0.673, 1.921, -2.096 ]
+
+}</div>
+
+self-Attention Mechanism (sam)<!-- .element: class="fragment fade-up" data-fragment-index="1" -->
+
+sam(embeddingsLayer1["The"])<!-- .element: class="fragment fade-up" data-fragment-index="2" -->
+
+sam(embeddingsLayer1["power"])<!-- .element: class="fragment fade-up" data-fragment-index="3" -->
+
+sam(embeddingsLayer1["clap"])<!-- .element: class="fragment fade-up" data-fragment-index="4" -->
+
+sam(embeddingsLayer1["per"])<!-- .element: class="fragment fade-up" data-fragment-index="5" -->
+
+
+Note:
+   - Each array is evaluated against each other array, with the elements of each array adjusted as a result
+
+This is where we see the unique form of the transformer first come into play.
+
+Self-Attention Mechanism (SAM)
+
+- Each token is processed in context of every other token.
+- This allows the model to find strong relationships between parts of the input regardless of their position in the input sequence.
+
+- For humans, it's like having a long conversation where you recall every word spoken, and so can make connections between similar ideas regardless of when they took place.
+
+----
+
+Heads:
+
+<div style="font-size: 0.3em">
+const Head1 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="1" -->
+</div>
+
+<div style="font-size: 0.3em">
+const Head2 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="2" -->
+</div>
+
+<div style="font-size: 0.3em">
+const Head3 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="3" -->
+</div>
+
+<div style="font-size: 0.3em">
+const Head4 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="4" -->
+</div>
+
+<div style="font-size: 0.3em">
+etc. <!-- .element: class="fragment" data-fragment-index="5" -->
+</div>
+
+Note:
+in the case of gpt 2, that's 12 heads. So, 12 times per layer. And it happens in parallel.
+The values from each head are then synthesized into a single set of embeddings yet again.
+
+----
+
+repeat for each intermediate layer
+
+<span class="fragment fade-up-then-out" data-fragment-index="1">layer<sup>n output</sup> => layer<sup>n+1 output</sup>  </span>
+
+<span class="fragment fade-up-then-semi-out" data-fragment-index="2">layer<sup>n+1 output</sup> => layer<sup>n+2 input</sup>  </span>
+
+<span class="fragment fade-up-then-semi-out" data-fragment-index="3">layer<sup>n+2 output</sup> => layer<sup>n+3 input</sup>  </span>
+
+<span class="fragment fade-up" data-fragment-index="4">etc.</span>
+
+Note:
+in the case of gpt 2, that's 12 layers.
+
+----
+
+output layer:
+
+<span class="fragment fade-up-then-out" data-fragment-index="1">predictToken(embeddingsLayer<sup>n final output</sup>) => </span>
+
+"went"<!-- .element: class="fragment" data-fragment-index="2" -->
+
+Note:
+we pass the final layer's output embeddings through a prediction function to get the most likely token.
+We get a 1 token output.
+In this case, we get
+# click
+
+"went"
+
+----
+
+repeat until we reach the context window limit
+
+Note: which in gpt 2 is 1024 tokens,
+
+but for our purposes we'll use 7.
+
+----
+
+Input:
+
+"The power clapper"
+
+Output:<!-- .element: class="fragment" data-fragment-index="1" -->
+
+"went straight to jial"<!-- .element: class="fragment" data-fragment-index="2" -->
+
+Note: which leaves us finally with the output of "went straight to jial"
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+if (output) {
+
+  return "end talk";
+
+}
+
+Note:
+Thank you everyone for your time.
+I hope you enjoyed the presentation and learned something new.
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+Works Cited
+<div style="width: 100%; font-size: 0.6em">
+  <a href="https://arxiv.org/abs/1706.03762">"Attention Is All You Need" by Vaswani et al. (transformer whitepaper)</a>
+</div>
+<div style="width: 100%; font-size: 0.6em">
+  <a href="https://github.com/openai/gpt-2/blob/master/src/model.py">GPT-2 on Github</a>
+</div>
+<div style="width: 100%; font-size: 0.6em">
+  <a href="https://arxiv.org/abs/2005.14165">"Language Models are Few-Shot Learners" by Wu et al.
+   (GPT-3 unofficial whitepaper)</a>
+</div>
+
+Note:
+here are my works cited
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+linkedin: @keithrgibson
+
+github: @keithgibson
+
+Note:
+you can find me here
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+<!-- .slide: data-background-image="assets/sponsorSlide2end_dark_highres.png" -->
+
+Note:
+And lastly, thank you again to Remake and the rest of our sponsors.
