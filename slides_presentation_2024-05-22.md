@@ -12,7 +12,7 @@ revealOptions:
 
 _An introduction_
 
-<div style="position: fixed; width: 100%; font-size: 0.4em">
+<div style="width: 100%; font-size: 0.4em">
 <p>by Keith Gibson</p>
 </div>
 
@@ -41,22 +41,12 @@ What's an *Artificial* Neural Network?
 
 I think more precision is helpful because an 'artificial' neural network is inspired by and roughly designed after another kind of neural network. That is, the biological one, in the brain.
 
-----
-
-# 🧠 <span class="fragment" data-fragment-index="0"> 🤖</span>
-
-Note:
 
 ## EDIT: say more here about the overlap between the biological and artificial neural networks, or find a better transition.
 
 Both are networks of interconnected - you guessed it - neurons
 # down
 
-----
-
-Note:
-# DONT DELETE HIS VERTICAL SLIDE
-THIS IS FOR THE EMPTY SLIDE SHOWING THE NEURONS IN THE BACKGROUND.
 
 /take a beat
 
@@ -252,7 +242,7 @@ lets walk through that in detail, using the example of a chatbot powered by GPT-
     )
 ```
 <br>
-<div style="position: fixed; width: 100%; font-size: 0.4em">
+<div style="width: 100%; font-size: 0.4em">
   <a href="https://github.com/openai/gpt-2/blob/master/src/model.py">GPT-2 on Github</a>
 </div>
 
