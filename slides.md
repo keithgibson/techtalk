@@ -41,6 +41,12 @@ What's an *Artificial* Neural Network?
 
 I think more precision is helpful because an 'artificial' neural network is inspired by and roughly designed after another kind of neural network. That is, the biological one, in the brain.
 
+----
+
+# 🧠 <span class="fragment" data-fragment-index="0"> 🤖</span>
+
+Note:
+
 ## EDIT: say more here about the overlap between the biological and artificial neural networks, or find a better transition.
 
 Both are networks of interconnected - you guessed it - neurons
@@ -49,11 +55,14 @@ Both are networks of interconnected - you guessed it - neurons
 ----
 
 Note:
+# DONT DELETE HIS VERTICAL SLIDE
+THIS IS FOR THE EMPTY SLIDE SHOWING THE NEURONS IN THE BACKGROUND.
+
 /take a beat
 
 But on its own
 
-# down
+# right
 
 
 –––––––––––––––––––––––––––––––––––––––––––––––
@@ -63,20 +72,36 @@ But on its own
 <table class="fragment" data-fragment-index="1">
   <tr>
     <th class="fragment" data-fragment-index="1">Biological</th>
-    <th class="fragment" data-fragment-index="3">Artificial</th>
+    <th class="fragment" data-fragment-index="1">Artificial</th>
+  </tr>
+    <tr>
+    <td class="fragment" data-fragment-index="2">sensory input</td>
+    <td class="fragment" data-fragment-index="3">text inputted</td>
   </tr>
   <tr>
-    <td class="fragment" data-fragment-index="2">synapse</td>
-    <td class="fragment" data-fragment-index="4">dimension</td>
+    <td class="fragment" data-fragment-index="4">chemical / electrical signal</td>
+    <td class="fragment" data-fragment-index="5">token</td>
   </tr>
   <tr>
-    <td class="fragment" data-fragment-index="5">signal</td>
-    <td class="fragment" data-fragment-index="6">value</td>
+    <td class="fragment" data-fragment-index="6">neuron</td>
+    <td class="fragment" data-fragment-index="7">embedding</td>
+  </tr>
+  <tr>
+    <td class="fragment" data-fragment-index="8">synapse</td>
+    <td class="fragment" data-fragment-index="9">element</td>
+  </tr>
+  <tr>
+    <td class="fragment" data-fragment-index="10">layers<sup>n</sup> (of neurons)</td>
+    <td class="fragment" data-fragment-index="11">layers<sup>n</sup> (of embeddings)</td>
+  </tr>
+  <tr>
+    <td class="fragment" data-fragment-index="12">involuntary action / conscious thought</td>
+    <td class="fragment" data-fragment-index="13">a token predicted</td>
   </tr>
 </table>
 
 Note:
-in a vacuum, what value does one neuron have? What can it accomplish?
+in a vacuum, what meaning does one neuron have? What can it accomplish?
 
 Well, none, nothing.
 
@@ -92,176 +117,128 @@ only when _connected_
 
 to other neurons,
 
-that it can take on value, that it can accomplish something.
+that it can take on meaning, that it can accomplish something.
 
-Maybe a network of neurons in relationship with one another
+lets walk through a rough comparison of biological and artificial neural networks from input all the way to output.
+# click
 
-In biological networks, this connection between neurons is called a synapse. It takes the form of a chemical or electrical signal.
-In artificial networks, we can liken this connection to what is called a dimension. Which is to say, a number. The value of the number is equivalent to the synapse's signal.
+1. Input received
 
+  B: sensory input
+
+  A: text inputted
 
 # click
 
-help: fact check and clarify the above
+2. Input converted to a form that can be processed
 
+  B: chemical / electrical signal
 
-–––––––––––––––––––––––––––––––––––––––––––––––
+  A: token
 
-And how do they work, roughly?
+3. it reaches the part of the network that contain the connections, which is to say
 
-----
-1. Input received, converted
+  B: neuron
 
-  B: sensory input => chemical or electrical signal  <!-- .element: class="fragment fade-up" data-fragment-index="1" -->
+  A: embedding
 
-  A: text => tokens => dimensions <!-- .element: class="fragment fade-up" data-fragment-index="2" -->
+4. The connection between
+ B: neurons is a synapse
+ A: embeddings is an element, which is to say, a number.
 
-----
-2. Input processed through successive layers
+5. layers process their inputs through successive layers
+    each layer's output is the next layer's input
 
-<span class="fragment fade-up-then-out" data-fragment-index="1">A: layer<sup>n output</sup> => layer<sup>n+1 output</sup>  </span>
+6. The output is produced
 
-<span class="fragment fade-up-then-semi-out" data-fragment-index="2"> layer<sup>n+1 output</sup> => layer<sup>n+2 input</sup>  </span>
-
-<span class="fragment fade-up-then-semi-out" data-fragment-index="3"> layer<sup>n+2 output</sup> => layer<sup>n+3 input</sup>  </span>
-
-<span class="fragment fade-up" data-fragment-index="4"> etc. </span>
-
-----
-3. Output produced
-
-B: conscious thought / involuntary action<!-- .element: class="fragment fade-up" data-fragment-index="1" -->
-
-A: token<!-- .element: class="fragment fade-up" data-fragment-index="2" -->
-
-Note:
-In the biological network,
-1.
-Input is received and converted into a form that can be processed
-  - sensory input is converted to a chemical or electrical signal.
-  - text is converted to dimensions
-
-2.
-That input is processed through successive layers of neurons.
-Each layer's output is the next layer's input.
-
-help: biological examples between the initial touch and the conscious thought of being touchéd. would the subconscious layer be involved here or is that too slow for this sort of processing?
-
-  The final intermediary layer might be the brain's subconscious processes, working behind the scenes to interpret and analyze information.
-
-3.
-The output is produced.
-  Conscious thoughts or involuntary actions.
-  Artificial: a token is predicted
+  B: conscious thought / involuntary action
+  A: a predicted token
 
 –––––––––––––––––––––––––––––––––––––––––––––––
 
 Okay. What's a Transformer?
 
+multi-head attention mechanism<!-- .element: class="fragment fade-up" data-fragment-index="1" -->
+
 Note: a transformer is a neural network, with the general architecture I just described. The difference between transformers and other text-centric neural networks is in how they process information in the intermediate layers.
 
+Specifically, in the implementation of something called
+# click
+the multi-head attention mechanism.
+which we'll explore deeper in a few slides.
+
 –––––––––––––––––––––––––––––––––––––––––––––––
-Chatbot example
+
+Chatbot example (at a very high level)
 
 Note:
-let's walk through each step of the transformer model at a macro level, using the example of a chatbot powered by GPT-2, which was released in 2018.
+let's walk through each step of the transformer model at a macro level, using the example of a chatbot powered by GPT-2, which was released in 2019.
 
 ----
 
-"The power clapper"
+input text:
 
-Note:
-
-
-----
-
-input layer:
-
-the input text is converted into numbers <!-- .element: class="fragment" data-fragment-index="1" -->
+"The power clapper"<!-- .element: class="fragment fade-up" data-fragment-index="1" -->
 
 Note:
 
 ----
 
-intermediate layer n<sup>0</sup>:
-
-the numbers from the input layer are processed<!-- .element: class="fragment" data-fragment-index="1" -->
-
-and fed to the subsequent layer, n<sup>1</sup> <!-- .element: class="fragment" data-fragment-index="2" -->
-
+processing through the input, intermediate, and output layers
 
 Note:
-test
+we get the 1 token with the highest probability.
+
+lets say we get -
+
+# down
 
 ----
 
-intermediate layer n<sup>1</sup>:
-
-<span class="fragment" data-fragment-index="1"> the numbers from the prior intermediate layer are processed </span>
-
-<span class="fragment" data-fragment-index="2"> and fed to the subsequent layer, n<sup>2</sup> </span>
-
-Note:
-test
-
-----
-
-and so on
-
-Note:
-
-----
-
-output layer:
-
-the numbers from the final intermediate layer are used to predict a word.<!-- .element: class="fragment" data-fragment-index="1" -->
-
-Note:
-
-
-We get an output of 1 word. In this case,
-
-----
-
-
+"went"
 
 
 Note:
-went
+"went"
 
 ----
-
-<span class="fragment fade-in-then-semi-out" data-fragment-index="0"> The initial input  </span>
-<span class="fragment fade-in-then-semi-out" data-fragment-index="2"> and the output  </span>
 
 <span class="fragment" data-fragment-index="1"> "The power clapper"  </span>
-<span class="fragment" data-fragment-index="3"> + "went  </span>
-<span class="fragment" data-fragment-index="5">straight</span>
-<span class="fragment" data-fragment-index="7">to</span>
-<span class="fragment" data-fragment-index="9">jial"</span>
+<span class="fragment" data-fragment-index="2"> + "went  </span>
+<span class="fragment" data-fragment-index="4">straight</span>
+<span class="fragment" data-fragment-index="6">to</span>
+<span class="fragment" data-fragment-index="8">jial"</span>
 
-
-<span class="fragment fade-in-then-out" data-fragment-index="4">are fed back in. </span>
-<span class="fragment fade-in-then-out" data-fragment-index="6">are fed back in. </span>
-<span class="fragment fade-in-then-out" data-fragment-index="8">are fed back in. </span>
+<span class="fragment fade-in-then-out" data-fragment-index="3">are fed back in. </span>
+<span class="fragment fade-in-then-out" data-fragment-index="5">are fed back in. </span>
+<span class="fragment fade-in-then-out" data-fragment-index="7">are fed back in. </span>
 
 Note:
-Let's start high level.
-"The power clapper".
+the initial input
+# click
+and the output
+# click
+are fed back in.
 
-input layer:
-Each word gets converted to a series of numbers.
+The process repeats, with each new word influencing subsequent predictions.
 
-
-output layer:
-   - The transformer predicts the most likely next word based on the processed input. Let's say it predicts "straight".
-   ----
-   - The predicted word is added to the sequence: "The power clapper".
-   ----
-   - The process repeats, with each new word influencing subsequent predictions.
-
+# click
+(straight)
+are fed back in.
+# click
+(to)
+are fed back in.
+# click
+(jial)
 
 –––––––––––––––––––––––––––––––––––––––––––––––
+
+Chatbot example (more detailed)
+
+Note:
+lets walk through that in detail, using the example of a chatbot powered by GPT-2, which was released in 2019.
+
+----
 
 ## GPT-2
 ```py [1|1,3|1,4|1,5|1,6|1,7|1,3-7]
@@ -281,16 +258,15 @@ output layer:
 
 Note:
   n_vocab=0
-    this is the number of unique words in the dataset.
-    and determines the size of the input embeddings
-    the number of tokens in the input sequence
+    this is the number of unique tokens in the dataset.
+    it says 0 here because it's open to be set by us.
+    the version trained by openAI was 50257.
 
   n_ctx=1024
-    the maximum number of tokens in the context window.
-    determines the number of positions in the positional encoding.
+    the maximum number of tokens in the context window, meaning the conversation.
 
   n_embd=768
-    the number of elements (dimensions) per embedding.
+    the number of elements (elements) per embedding.
 
   n_head=12
     the number of attention heads in each layer
@@ -302,176 +278,49 @@ Note:
     this is the number of times the model will apply the transformer
     to the input sequence.
 
+----
 
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-Let's go through that step by step.
-
-–––––––––––––––––––––––––––––––––––––––––––––––
+input:
 
 "The power clapper"
 
-"The":
+----
 
-"power": [ 3.249, 0.713, 1.687 ] <!-- .element: class="fragment fade-up" data-fragment-index="1" -->
+tokenization:
 
-"clapper": [ 0.147, 2.198, -0.589 ] <!-- .element: class="fragment fade-up" data-fragment-index="2" -->
+"the",<!-- .element: class="fragment" data-fragment-index="1" -->
 
-Note:
-INSERT THE array values in this slide
-   - The input is split into tokens: "The", "power", "clapper",
-   ----
-   - Each token is mapped to its corresponding embedding vector, which is just a fancy way of saying an array of numbers.
+"power",<!-- .element: class="fragment" data-fragment-index="2" -->
 
-  that leaves us with something like this:
+"clap",<!-- .element: class="fragment" data-fragment-index="3" -->
 
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-{
-  [ -1.228, 0.733, -0.316 ],
-
-  [ 3.249, 0.713, 1.687 ],
-
-  [ 0.147, 2.198, -0.589 ],
-
-}
-
-Note:
-combine this slide with the slide below.
-slide in the selfAttentionMechanism() function from the left if possible
-
-[ 4.875, -1.434, 2.302 ]
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-
-selfAttentionMechanism([ -1.228, 0.733, -0.316 ])
-
-selfAttentionMechanism([ 3.249, 0.713, 1.687 ])<!-- .element: class="fragment fade-up" data-fragment-index="1" -->
-
-selfAttentionMechanism([ 0.147, 2.198, -0.589 ])<!-- .element: class="fragment fade-up" data-fragment-index="2" -->
-
-
-note:
-   - Each element in one array is evaluated against each element in every other array.
-
-selfAttentionMechanism([ 4.875, -1.434, 2.302 ])<!-- .element: class="fragment fade-up" data-fragment-index="3" -->
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-[
-
-  [0.13, 0.64, 0.82],
-
-  [0.75, 0.39, 0.11],
-
-  [0.95, 0.58, 0.26],
-
-  [0.49, 0.92, 0.61]
-
-]
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-repeat for each intermediary layer
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-predictionAlgorithm(lastIntermediateLayerOutputArray)
-
-"jumps" <!-- .element: class="fragment" data-fragment-index="1" -->
+"per"<!-- .element: class="fragment" data-fragment-index="3" -->
 
 Note:
 
-–––––––––––––––––––––––––––––––––––––––––––––––
+Input text is broken down into tokens.
+Long words are broken down into shorter tokens.
 
-repeat
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-Text Generation Step 2
-
-2. Self-Attention and Multi-Head Attention:
-   - The embeddings pass through the self-attention mechanism.
-   ----
-
-   - Multiple attention heads analyze different aspects simultaneously.
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-Text Generation Step 3
-
-3. Feedforward Networks and Positional Encoding:
-   - The output from the attention mechanisms is refined by feedforward networks.
-   ----
-   - Positional information is added to preserve the order of the tokens.
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-Text Generation Step 4
-
-4. Text Generation:
-
-
-Tokenization and Embeddings
-
-- Input text is broken down into tokens
 ----
-- Each token is mapped to an embedding vector
 
-–––––––––––––––––––––––––––––––––––––––––––––––
-Self-Attention Mechanism (SAM)
+embeddings:
 
-- Core of transformer's parallel processing
+<br>
+
+<div style="font-size: 0.6em">
+"we convert the token to a dense vector representation using the embedding matrix"<!-- .element: class="fragment fade-in-then-semi-out" data-fragment-index="1" -->
+</div>
+
+<br>
+<div style="font-size: 0.6em">
+"we look up the array of (numeric) values for each token in a database"<!-- .element: class="fragment fade-in" data-fragment-index="2" -->
+</div>
+
 ----
-- Each word is processed in context of every other word
-----
-- Like a conversation where you recall every word spoken
 
-–––––––––––––––––––––––––––––––––––––––––––––––
-Multi-Head Self-Attention
+embeddings:
 
-- Multiple attention "heads" per layer
-----
-- Each head focuses on different aspects of input
-----
-- Heads work in parallel to analyze input from different perspectives
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-Feedforward Networks (FFNs)
-
-- Additional layers of processing
-----
-- Each node's output from self-attention is independently transformed
-----
-- Similar to how brain regions refine sensory input
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-Positional Encoding
-
-- Adds information about word position
-----
-- Ensures model understands word order
-----
-- Crucial for meaning
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-<!-- .slide: data-background-image="assets/sponsorSlide2end_dark_highres.png" -->
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-Works Cited
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-github: @keithgibson
-linkedin: @keithrgibson
-
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-the floating point array
-
-"The":<!-- .element: class="fragment fade-up-then-out" data-fragment-index="0" -->
+"The":<!-- .element: class="fragment fade-up-then-out" data-fragment-index="3" -->
 <div style="font-size: 0.1em">
   [ -1.228084989880871, 0.7331303424681268, -0.31621513108079213, 3.1979479873077885,
   2.168531500398558, -0.24906143658303126, -1.5775041584541172, -2.5750147547274893,
@@ -660,4 +509,188 @@ the floating point array
   1.1323005742102836, 4.033599810095321, 3.4066255974841013, 3.446464428226861, 3.8875149774349094,
   0.8587225445839897, 4.490651509465419, 1.9132361931576902, -4.04632526265493, -3.810959202805988,
   -0.7528097432783909
-]</div> <!-- .element: class="fragment fade-up-then-out" data-fragment-index="0" -->
+]</div> <!-- .element: class="fragment fade-up-then-out" data-fragment-index="3" -->
+
+"power": [ 3.249, 0.713, 1.687 ] <!-- .element: class="fragment fade-up" data-fragment-index="4" -->
+
+"clap": [ 0.147, 2.198, -0.589 ] <!-- .element: class="fragment fade-up" data-fragment-index="5" -->
+
+"per": [ 0.673, 1.921, -2.096 ] <!-- .element: class="fragment fade-up" data-fragment-index="6" -->
+
+Note:
+if i were to say, "we convert the token to a dense vector representation using the embedding matrix", what might you think that means?
+
+# down
+
+What about if I said "we look up the array of numeric values for each token in a database"?
+
+It’s the same thing.
+
+
+INSERT THE array values in this slide
+   - The input is split into tokens: "The", "power", "clapper",
+   ----
+   - Each token is mapped to its corresponding embedding vector, which is just a fancy way of saying an array of numbers.
+
+
+----
+
+<div style="font-size: 0.5em">
+const embeddingsLayer1 = {
+
+  "The": [ -1.228, 0.733, -0.316 ],
+
+  "power": [ 3.249, 0.713, 1.687 ],
+
+  "clap": [ 0.147, 2.198, -0.589 ],
+
+  "per": [ 0.673, 1.921, -2.096 ]
+
+}</div>
+
+self-Attention Mechanism (sam)<!-- .element: class="fragment fade-up" data-fragment-index="1" -->
+
+sam(embeddingsLayer1["The"])<!-- .element: class="fragment fade-up" data-fragment-index="2" -->
+
+sam(embeddingsLayer1["power"])<!-- .element: class="fragment fade-up" data-fragment-index="3" -->
+
+sam(embeddingsLayer1["clap"])<!-- .element: class="fragment fade-up" data-fragment-index="4" -->
+
+sam(embeddingsLayer1["per"])<!-- .element: class="fragment fade-up" data-fragment-index="5" -->
+
+
+Note:
+   - Each array is evaluated against each other array, with the elements of each array adjusted as a result
+
+This is where we see the unique form of the transformer first come into play.
+
+Self-Attention Mechanism (SAM)
+
+- Each token is processed in context of every other token.
+- This allows the model to find strong relationships between parts of the input regardless of their position in the input sequence.
+
+- For humans, it's like having a long conversation where you recall every word spoken, and so can make connections between similar ideas regardless of when they took place.
+
+----
+
+Heads:
+
+<div style="font-size: 0.3em">
+const Head1 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="1" -->
+</div>
+
+<div style="font-size: 0.3em">
+const Head2 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="2" -->
+</div>
+
+<div style="font-size: 0.3em">
+const Head3 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="3" -->
+</div>
+
+<div style="font-size: 0.3em">
+const Head4 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="4" -->
+</div>
+
+<div style="font-size: 0.3em">
+etc. <!-- .element: class="fragment" data-fragment-index="5" -->
+</div>
+
+Note:
+in the case of gpt 2, that's 12 heads. So, 12 times per layer. And it happens in parallel.
+The values from each head are then synthesized into a single set of embeddings yet again.
+
+----
+
+repeat for each intermediate layer
+
+<span class="fragment fade-up-then-out" data-fragment-index="1">layer<sup>n output</sup> => layer<sup>n+1 output</sup>  </span>
+
+<span class="fragment fade-up-then-semi-out" data-fragment-index="2">layer<sup>n+1 output</sup> => layer<sup>n+2 input</sup>  </span>
+
+<span class="fragment fade-up-then-semi-out" data-fragment-index="3">layer<sup>n+2 output</sup> => layer<sup>n+3 input</sup>  </span>
+
+<span class="fragment fade-up" data-fragment-index="4">etc.</span>
+
+Note:
+in the case of gpt 2, that's 12 layers.
+
+----
+
+output layer:
+
+<span class="fragment fade-up-then-out" data-fragment-index="1">predictToken(embeddingsLayer<sup>n final output</sup>) => </span>
+
+"went"<!-- .element: class="fragment" data-fragment-index="2" -->
+
+Note:
+we pass the final layer's output embeddings through a prediction function to get the most likely token.
+We get a 1 token output.
+In this case, we get
+# click
+
+"went"
+
+----
+
+repeat until we reach the context window limit
+
+Note: which in gpt 2 is 1024 tokens,
+
+but for our purposes we'll use 7.
+
+----
+
+Input:
+
+"The power clapper"
+
+Output:<!-- .element: class="fragment" data-fragment-index="1" -->
+
+"went straight to jial"<!-- .element: class="fragment" data-fragment-index="2" -->
+
+Note: which leaves us finally with the output of "went straight to jial"
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+if (output) {
+
+  return "end talk";
+
+}
+
+Note:
+Thank you everyone for your time.
+I hope you enjoyed the presentation and learned something new.
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+Works Cited
+<div style="width: 100%; font-size: 0.6em">
+  <a href="https://arxiv.org/abs/1706.03762">"Attention Is All You Need" by Vaswani et al. (transformer whitepaper)</a>
+</div>
+<div style="width: 100%; font-size: 0.6em">
+  <a href="https://github.com/openai/gpt-2/blob/master/src/model.py">GPT-2 on Github</a>
+</div>
+<div style="width: 100%; font-size: 0.6em">
+  <a href="https://arxiv.org/abs/2005.14165">"Language Models are Few-Shot Learners" by Wu et al.
+   (GPT-3 unofficial whitepaper)</a>
+</div>
+
+Note:
+here are my works cited
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+linkedin: @keithrgibson
+
+github: @keithgibson
+
+Note:
+you can find me here
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+<!-- .slide: data-background-image="assets/sponsorSlide2end_dark_highres.png" -->
+
+Note:
+And lastly, thank you again to Remake and the rest of our sponsors.
