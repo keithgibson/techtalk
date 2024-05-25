@@ -4,15 +4,11 @@ revealOptions:
   transition: 'slide'
 ---
 
-<!-- .slide: data-background-image="assets/sponsorSlide1start_dark_highres.png" -->
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
 #### Neural Networks and Transformers
 
 _An introduction_
 
-<div style="position: fixed; width: 100%; font-size: 0.4em">
+<div style="width: 100%; font-size: 0.4em">
 <p>by Keith Gibson</p>
 </div>
 
@@ -76,7 +72,7 @@ But on its own
   </tr>
     <tr>
     <td class="fragment" data-fragment-index="2">sensory input</td>
-    <td class="fragment" data-fragment-index="3">text inputted</td>
+    <td class="fragment" data-fragment-index="3">text input</td>
   </tr>
   <tr>
     <td class="fragment" data-fragment-index="4">chemical / electrical signal</td>
@@ -156,14 +152,18 @@ lets walk through a rough comparison of biological and artificial neural network
 
 –––––––––––––––––––––––––––––––––––––––––––––––
 
-Okay. What's a Transformer?
-
-multi-head attention mechanism<!-- .element: class="fragment fade-up" data-fragment-index="1" -->
+What's a Transformer? How is it different?
 
 Note: a transformer is a neural network, with the general architecture I just described. The difference between transformers and other text-centric neural networks is in how they process information in the intermediate layers.
+# down
 
+----
+
+*"multi-head attention mechanism"*
+
+Note:
 Specifically, in the implementation of something called
-# click
+# right
 the multi-head attention mechanism.
 which we'll explore deeper in a few slides.
 
@@ -195,7 +195,7 @@ lets say we get -
 
 ----
 
-<span class="fragment" data-fragment-index="1"> The power clap per + </span>
+<span class="fragment" data-fragment-index="1">The power clapper + </span>
 went
 <span class="fragment" data-fragment-index="3">straight</span>
 <span class="fragment" data-fragment-index="5">to</span>
@@ -237,7 +237,7 @@ lets walk through that in detail, using the example of a chatbot powered by GPT-
 ----
 
 ## GPT-2
-```py [1|1,3|1,4|1,5|1,6|1,7|1,3-7]
+```py [1|3|4|5|6|7]
 # The model's own (hyper)parameters
     return HParams(
         n_vocab=0,
@@ -248,7 +248,7 @@ lets walk through that in detail, using the example of a chatbot powered by GPT-
     )
 ```
 <br>
-<div style="position: fixed; width: 100%; font-size: 0.4em">
+<div style="width: 100%; font-size: 0.4em">
   <a href="https://github.com/openai/gpt-2/blob/master/src/model.py">GPT-2 on Github</a>
 </div>
 
@@ -299,214 +299,34 @@ Long words are broken down into shorter tokens.
 
 ----
 
-embeddings:
-
-<br>
+tokens => embeddings
 
 <div style="font-size: 0.6em">
 "we convert the token to a dense vector representation using the embedding matrix"<!-- .element: class="fragment fade-in-then-semi-out" data-fragment-index="1" -->
 </div>
 
-<br>
 <div style="font-size: 0.6em">
-"we look up the array of (numeric) values for each token in a database"<!-- .element: class="fragment fade-in" data-fragment-index="2" -->
+=== <!-- .element: class="fragment fade-in-then-semi-out" data-fragment-index="2" -->
 </div>
-
-----
-
-embeddings:
-
-"The":<!-- .element: class="fragment fade-up-then-out" data-fragment-index="3" -->
-<div style="font-size: 0.1em" id="arrayContainer">
-  <!-- The array of numbers will be inserted here by JavaScript -->
+<div style="font-size: 0.6em">
+"we look up the token in a dictionary. we get back its value: an array of numbers"<!-- .element: class="fragment fade-in" data-fragment-index="3" -->
 </div>
-
-"power": [ 3.249, 0.713, 1.687 ] <!-- .element: class="fragment fade-up" data-fragment-index="4" -->
-
-"clap": [ 0.147, 2.198, -0.589 ] <!-- .element: class="fragment fade-up" data-fragment-index="5" -->
-
-"per": [ 0.673, 1.921, -2.096 ] <!-- .element: class="fragment fade-up" data-fragment-index="6" -->
 
 Note:
 if i were to say, "we convert the token to a dense vector representation using the embedding matrix", what might you think that means?
 
 # down
 
-What about if I said "we look up the array of numeric values for each token in a database"?
+What about if I said "we look up the value of the token in a dictionary. we get back its value: an array of numbers"?
 
 It’s the same thing.
 
-
-INSERT THE array values in this slide
-   - The input is split into tokens: "The", "power", "clapper",
-   ----
-   - Each token is mapped to its corresponding embedding vector, which is just a fancy way of saying an array of numbers.
-
-
 ----
 
-<div style="font-size: 0.5em">
-const embeddingsLayer1 = {
+embeddings:
 
-  "The": [ -1.228, 0.733, -0.316 ],
-
-  "power": [ 3.249, 0.713, 1.687 ],
-
-  "clap": [ 0.147, 2.198, -0.589 ],
-
-  "per": [ 0.673, 1.921, -2.096 ]
-
-}</div>
-
-self-Attention Mechanism (sam)<!-- .element: class="fragment fade-up" data-fragment-index="1" -->
-
-sam(embeddingsLayer1["The"])<!-- .element: class="fragment fade-up" data-fragment-index="2" -->
-
-sam(embeddingsLayer1["power"])<!-- .element: class="fragment fade-up" data-fragment-index="3" -->
-
-sam(embeddingsLayer1["clap"])<!-- .element: class="fragment fade-up" data-fragment-index="4" -->
-
-sam(embeddingsLayer1["per"])<!-- .element: class="fragment fade-up" data-fragment-index="5" -->
-
-
-Note:
-   - Each array is evaluated against each other array, with the elements of each array adjusted as a result
-
-This is where we see the unique form of the transformer first come into play.
-
-Self-Attention Mechanism (SAM)
-
-- Each token is processed in context of every other token.
-- This allows the model to find strong relationships between parts of the input regardless of their position in the input sequence.
-
-- For humans, it's like having a long conversation where you recall every word spoken, and so can make connections between similar ideas regardless of when they took place.
-
-----
-
-Heads:
-
-<div style="font-size: 0.3em">
-const Head1 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="1" -->
-</div>
-
-<div style="font-size: 0.3em">
-const Head2 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="2" -->
-</div>
-
-<div style="font-size: 0.3em">
-const Head3 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="3" -->
-</div>
-
-<div style="font-size: 0.3em">
-const Head4 = sam(embeddingsLayer1["The"]), sam(embeddingsLayer1["power"]), sam(embeddingsLayer1["clap"]), sam(embeddingsLayerN["per"])<!-- .element: class="fragment" data-fragment-index="4" -->
-</div>
-
-<div style="font-size: 0.3em">
-etc. <!-- .element: class="fragment" data-fragment-index="5" -->
-</div>
-
-Note:
-in the case of gpt 2, that's 12 heads. So, 12 times per layer. And it happens in parallel.
-The values from each head are then synthesized into a single set of embeddings yet again.
-
-----
-
-repeat for each intermediate layer
-
-<span class="fragment fade-up-then-out" data-fragment-index="1">layer<sup>n output</sup> => layer<sup>n+1 output</sup>  </span>
-
-<span class="fragment fade-up-then-semi-out" data-fragment-index="2">layer<sup>n+1 output</sup> => layer<sup>n+2 input</sup>  </span>
-
-<span class="fragment fade-up-then-semi-out" data-fragment-index="3">layer<sup>n+2 output</sup> => layer<sup>n+3 input</sup>  </span>
-
-<span class="fragment fade-up" data-fragment-index="4">etc.</span>
-
-Note:
-in the case of gpt 2, that's 12 layers.
-
-----
-
-output layer:
-
-<span class="fragment fade-up-then-out" data-fragment-index="1">predictToken(embeddingsLayer<sup>n final output</sup>) => </span>
-
-"went"<!-- .element: class="fragment" data-fragment-index="2" -->
-
-Note:
-we pass the final layer's output embeddings through a prediction function to get the most likely token.
-We get a 1 token output.
-In this case, we get
-# down
-
-"went"
-
-----
-
-repeat until we reach the context window limit
-
-Note: which in gpt 2 is 1024 tokens,
-
-but for our purposes we'll use 7.
-
-----
-
-Input:
-
-"The power clapper"
-
-Output:<!-- .element: class="fragment" data-fragment-index="1" -->
-
-"went straight to jial"<!-- .element: class="fragment" data-fragment-index="2" -->
-
-Note: which leaves us finally with the output of "went straight to jial"
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-if (output) {
-
-  return "end talk";
-
-}
-
-Note:
-Thank you everyone for your time.
-I hope you enjoyed the presentation and learned something new.
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-Works Cited
-<div style="width: 100%; font-size: 0.6em">
-  <a href="https://arxiv.org/abs/1706.03762">"Attention Is All You Need" by Vaswani et al. (transformer whitepaper)</a>
-</div>
-<div style="width: 100%; font-size: 0.6em">
-  <a href="https://github.com/openai/gpt-2/blob/master/src/model.py">GPT-2 on Github</a>
-</div>
-<div style="width: 100%; font-size: 0.6em">
-  <a href="https://arxiv.org/abs/2005.14165">"Language Models are Few-Shot Learners" by Wu et al.
-   (GPT-3 unofficial whitepaper)</a>
-</div>
-
-Note:
-here are my works cited
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-linkedin: @keithrgibson
-
-github: @keithgibson
-
-Note:
-you can find me here
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-
-<!-- .slide: data-background-image="assets/sponsorSlide2end_dark_highres.png" -->
-
-Note:
-And lastly, thank you again to Remake and the rest of our sponsors.
-
-–––––––––––––––––––––––––––––––––––––––––––––––
-<!--
+<div>"The":<!-- .element: class="fragment fade-up" data-fragment-index="1" --></div>
+<div style="font-size: 0.11em" class="fragment fade-up" data-fragment-index="1">
   [ -1.228084989880871, 0.7331303424681268, -0.31621513108079213, 3.1979479873077885,
   2.168531500398558, -0.24906143658303126, -1.5775041584541172, -2.5750147547274893,
   1.8264231424899657, 4.448246216443945, 4.616339993884374, -1.3465269175726058,
@@ -694,5 +514,198 @@ And lastly, thank you again to Remake and the rest of our sponsors.
   1.1323005742102836, 4.033599810095321, 3.4066255974841013, 3.446464428226861, 3.8875149774349094,
   0.8587225445839897, 4.490651509465419, 1.9132361931576902, -4.04632526265493, -3.810959202805988,
   -0.7528097432783909
-  ];
--->
+]
+</div>
+<div>"power": [ 3.249, 0.713, 1.687 ] <!-- .element: class="fragment fade-up" data-fragment-index="4" --></div>
+<div>"clap": [ 0.147, 2.198, -0.589 ] <!-- .element: class="fragment fade-up" data-fragment-index="5" --></div>
+<div>"per": [ 0.673, 1.921, -2.096 ] <!-- .element: class="fragment fade-up" data-fragment-index="6" --></div>
+
+Note:
+
+INSERT THE array values in this slide
+   - The input is split into tokens: "The", "power", "clapper",
+   ----
+   - Each token is mapped to its corresponding embedding vector, which is just a fancy way of saying an array of numbers.
+
+----
+
+```javascript
+const embeddings = {
+  "The": [ -1.228, 0.733, -0.316 ],
+  "power": [ 3.249, 0.713, 1.687 ],
+  "clap": [ 0.147, 2.198, -0.589 ],
+  "per": [ 0.673, 1.921, -2.096 ]}
+```
+<!-- .element: class="fragment semi-fade-out" data-fragment-index="1" -->
+
+```javascript
+function selfAttention(embeddings, headNWeights, d_k) {
+  const { W_Query, W_Key, W_Value } = headNWeights;
+  const updatedEmbeddings =
+  softmax(
+    (W_Query * embeddings * transpose(W_Key * embeddings))
+    / sqrt(d_k)) * W_Value * embeddings;
+  return updatedEmbeddings;}
+```
+<!-- .element: class="fragment fade-in-then-semi-out" data-fragment-index="1" -->
+
+```javascript
+selfAttention(embeddings, headNWeights, d_k) // ->
+/* The: [ -2.941, 0.483, -0.912 ],
+   power: [ 2.319, 0.939, 1.034 ],
+   clap: [ 0.593, 1.987, -0.349 ],
+   per: [ 1.408, 2.651, -3.889 ] */
+```
+<!-- .element: class="fragment fade-in-then-semi-out" data-fragment-index="2" -->
+
+Note:
+   - Each array is evaluated against each other array, with the elements of each array adjusted as a result
+
+This is where we see the unique component of the transformer first come into play.
+
+Self-Attention Mechanism
+
+- Each token is processed in context of every other token.
+- This allows the model to find strong relationships between parts of the input regardless of their position in the input sequence.
+
+- For humans, it's like having a long conversation where you recall every word spoken, and so can make connections between similar ideas regardless of when they took place.
+
+----
+
+Heads
+
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="1">const head1embeds = selfAttention(embeddings, head1Weights, d_k)</sup></div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="2">const head2embeds = selfAttention(embeddings, head2Weights, d_k)</sup>  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="3"> ...  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="4"> ...  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="5"> ...  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="6"> ...  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="7"> ...  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="8"> ...  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="9"> ...  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="10"> ...  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="11">const head11embeds = selfAttention(embeddings, head11Weights, d_k)</sup>  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="12">const head12embeds = selfAttention(embeddings, head12Weights, d_k)</div>
+
+Note:
+in the case of gpt 2, that's 12 heads. So, 12 times per layer. And it happens in parallel.
+The values from each head are then synthesized into a single set of embeddings yet again.
+
+----
+
+<div style="font-size: 0.6em">synthesize the output from all heads, returning a single set of embeddings once again</div>
+
+```javascript
+const heads = [
+  head1embeds, head2embeds, head3embeds, head4embeds,
+  head5embeds, head6embeds, head7embeds, head8embeds,
+  head9embeds, head10embeds, head11embeds, head12embeds
+];
+```
+<!-- .element: class="fragment fade-in-then-semi-out" data-fragment-index="1" -->
+
+
+```javascript
+const W_Output = ((h * d_k), d_model);
+function multiHeadAttention(heads, W_Output) {
+  const multiHeadOutput =
+    concat(heads.join(', ')) * W_Output;
+  return multiHeadOutput;
+}
+```
+<!-- .element: class="fragment fade-in-then-semi-out" data-fragment-index="2" -->
+
+```javascript
+const outputEmbeds = multiHeadAttention(heads, W_Output);
+// ->
+/* The: [ 0.774, -2.616, -0.571 ],
+   power: [ 2.105, 0.639, 0.896 ],
+   clap: [ -2.399, -1.685, 1.412 ],
+   per: [ -1.021, -1.932, -2.761 ] */
+```
+<!-- .element: class="fragment fade-in-then-semi-out" data-fragment-index="3" -->
+
+----
+
+repeat for each intermediate layer
+
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="1">layer<sup>1 outputEmbeds</sup> => layer<sup>2 inputEmbeds</sup></div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="2">layer<sup>2 outputEmbeds</sup> => layer<sup>3 inputEmbeds</sup>  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="3"> ... </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="4"> ... </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="5"> ... </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="6"> ... </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="7"> ... </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="8"> ... </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="9"> ... </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="10"> ... </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="11">layer<sup>11 outputEmbeds</sup> => layer<sup>12 inputEmbeds</sup>  </div>
+<div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="12">layer<sup>12 outputEmbeds</sup> => ... </div>
+
+Note:
+in the case of gpt 2, that's 12 layers.
+
+----
+
+output layer
+
+<span class="fragment fade-in" data-fragment-index="1">predictToken(layer<sup>12 outputEmbeds</sup>) </span>
+
+Note:
+
+we pass the final layer's output embeddings through a prediction function to get the most likely token.
+We get a 1 token output.
+In this case, we get"
+# down
+
+----
+
+*<span style="font-size: 0.65em" class="fragment" data-fragment-index="1">repeat all prior steps until we reach the context window limit or a special stop token</span>*
+
+<span class="fragment" data-fragment-index="2"> The power clap per + </span>
+went
+<span class="fragment" data-fragment-index="3">straight</span>
+<span class="fragment" data-fragment-index="4">to</span>
+<span class="fragment" data-fragment-index="5">jial</span>
+
+Note:
+which in gpt 2 is 1024 tokens,
+
+but for our purposes we'll use 8.
+
+which leaves us finally with the output of "we"nt straight to jial"
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+```javascript
+if (output) {
+  return "end talk on Neural Networks and Transformers";
+}
+```
+
+Note:
+Thank you everyone for your time.
+I hope you enjoyed the presentation and learned something new.
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+Works Cited
+<div style="width: 100%; font-size: 0.6em">
+<a href="https://arxiv.org/abs/1706.03762">"Attention Is All You Need" by Vaswani et al. <a style="font-size: 0.6em"> (the Transformer whitepaper)</a></a>
+
+<a href="https://github.com/openai/gpt-2/blob/master/src/model.py">GPT-2 on Github</a>
+
+<a href="https://arxiv.org/abs/2005.14165">"Language Models are Few-Shot Learners" by Wu et al. <a style="font-size: 0.6em"> (GPT-3 unofficial whitepaper)</a></a>
+</div>
+
+Note:
+here are my works cited
+
+–––––––––––––––––––––––––––––––––––––––––––––––
+
+github: <a href="Https://github.com/keithgibson">@keithgibson</a>
+
+linkedin: <a href="Https://linkedin.com/in/keithrgibson">@keithrgibson</a>
+
+Note:
+you can find me here

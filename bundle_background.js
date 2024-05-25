@@ -87,7 +87,7 @@
 
 			return Zdog;
 
-			} ) ); 
+			} ) );
 		} (boilerplate));
 		return boilerplate.exports;
 	}
@@ -170,7 +170,7 @@
 
 			return CanvasRenderer;
 
-			} ) ); 
+			} ) );
 		} (canvasRenderer));
 		return canvasRenderer.exports;
 	}
@@ -262,7 +262,7 @@
 
 			return SvgRenderer;
 
-			} ) ); 
+			} ) );
 		} (svgRenderer));
 		return svgRenderer.exports;
 	}
@@ -435,7 +435,7 @@
 
 			return Vector;
 
-			} ) ); 
+			} ) );
 		} (vector));
 		return vector.exports;
 	}
@@ -695,7 +695,7 @@
 
 			return Anchor;
 
-			} ) ); 
+			} ) );
 		} (anchor));
 		return anchor.exports;
 	}
@@ -833,7 +833,7 @@
 
 			return Dragger;
 
-			} ) ); 
+			} ) );
 		} (dragger));
 		return dragger.exports;
 	}
@@ -1093,7 +1093,7 @@
 
 			return Illustration;
 
-			} ) ); 
+			} ) );
 		} (illustration));
 		return illustration.exports;
 	}
@@ -1196,7 +1196,7 @@
 
 			return PathCommand;
 
-			} ) ); 
+			} ) );
 		} (pathCommand));
 		return pathCommand.exports;
 	}
@@ -1424,7 +1424,7 @@
 
 			return Shape;
 
-			} ) ); 
+			} ) );
 		} (shape));
 		return shape.exports;
 	}
@@ -1501,7 +1501,7 @@
 
 			return Group;
 
-			} ) ); 
+			} ) );
 		} (group));
 		return group.exports;
 	}
@@ -1549,7 +1549,7 @@
 
 			return Rect;
 
-			} ) ); 
+			} ) );
 		} (rect));
 		return rect.exports;
 	}
@@ -1638,7 +1638,7 @@
 
 			return RoundedRect;
 
-			} ) ); 
+			} ) );
 		} (roundedRect));
 		return roundedRect.exports;
 	}
@@ -1713,7 +1713,7 @@
 
 			return Ellipse;
 
-			} ) ); 
+			} ) );
 		} (ellipse));
 		return ellipse.exports;
 	}
@@ -1761,7 +1761,7 @@
 
 			return Polygon;
 
-			} ) ); 
+			} ) );
 		} (polygon));
 		return polygon.exports;
 	}
@@ -1869,7 +1869,7 @@
 
 			return Hemisphere;
 
-			} ) ); 
+			} ) );
 		} (hemisphere));
 		return hemisphere.exports;
 	}
@@ -2044,7 +2044,7 @@
 
 			return Cylinder;
 
-			} ) ); 
+			} ) );
 		} (cylinder));
 		return cylinder.exports;
 	}
@@ -2189,7 +2189,7 @@
 
 			return Cone;
 
-			} ) ); 
+			} ) );
 		} (cone));
 		return cone.exports;
 	}
@@ -2371,7 +2371,7 @@
 
 			return Box;
 
-			} ) ); 
+			} ) );
 		} (box));
 		return box.exports;
 	}
@@ -2431,7 +2431,7 @@
 		      Zdog.Box = Box;
 
 		      return Zdog;
-		} ); 
+		} );
 	} (js));
 
 	var jsExports = js.exports;
