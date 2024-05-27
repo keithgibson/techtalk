@@ -6,9 +6,9 @@ revealOptions:
 
 #### Neural Networks and Transformers
 
-_An introduction_
+**_An introduction_**
 
-<div style="width: 100%; font-size: 0.4em">
+<div style="width: 100%; font-size: 0.4em; font-weight: bold">
 <p>by Keith Gibson</p>
 </div>
 
@@ -21,7 +21,7 @@ We'll start with neural networks broadly, followed by the key characteristics of
 
 –––––––––––––––––––––––––––––––––––––––––––––––
 
-So...what is a Neural Network?
+**So...what is a Neural Network?**
 
 Note:
 Well, let's start by being more precise and instead ask -
@@ -30,7 +30,7 @@ Well, let's start by being more precise and instead ask -
 
 ----
 
-What's an *Artificial* Neural Network?
+**What's an *Artificial* Neural Network?**
 
 Note:
 What's an *Artificial* Neural Network?
@@ -67,32 +67,32 @@ But on its own
 
 <table class="fragment" data-fragment-index="1">
   <tr>
-    <th class="fragment" data-fragment-index="1">Biological</th>
-    <th class="fragment" data-fragment-index="1">Artificial</th>
+    <th class="fragment" data-fragment-index="1" style="font-weight: bold">Biological</th>
+    <th class="fragment" data-fragment-index="1" style="font-weight: bold">Artificial</th>
   </tr>
     <tr>
-    <td class="fragment" data-fragment-index="2">sensory input</td>
-    <td class="fragment" data-fragment-index="3">text input</td>
+    <td class="fragment" data-fragment-index="2" style="font-size: 0.8em">sensory input</td>
+    <td class="fragment" data-fragment-index="3" style="font-size: 0.8em">text input</td>
   </tr>
   <tr>
-    <td class="fragment" data-fragment-index="4">chemical / electrical signal</td>
-    <td class="fragment" data-fragment-index="5">token</td>
+    <td class="fragment" data-fragment-index="4" style="font-size: 0.8em">chemical / electrical signal</td>
+    <td class="fragment" data-fragment-index="5" style="font-size: 0.8em">token</td>
   </tr>
   <tr>
-    <td class="fragment" data-fragment-index="6">neuron</td>
-    <td class="fragment" data-fragment-index="7">embedding</td>
+    <td class="fragment" data-fragment-index="6" style="font-size: 0.8em">neuron</td>
+    <td class="fragment" data-fragment-index="7" style="font-size: 0.8em">embedding</td>
   </tr>
   <tr>
-    <td class="fragment" data-fragment-index="8">synapse</td>
-    <td class="fragment" data-fragment-index="9">element</td>
+    <td class="fragment" data-fragment-index="8" style="font-size: 0.8em">synapse</td>
+    <td class="fragment" data-fragment-index="9" style="font-size: 0.8em">element</td>
   </tr>
   <tr>
-    <td class="fragment" data-fragment-index="10">layers<sup>n</sup> (of neurons)</td>
-    <td class="fragment" data-fragment-index="11">layers<sup>n</sup> (of embeddings)</td>
+    <td class="fragment" data-fragment-index="10" style="font-size: 0.8em">layers (of neurons)</td>
+    <td class="fragment" data-fragment-index="11" style="font-size: 0.8em">layers (of embeddings)</td>
   </tr>
   <tr>
-    <td class="fragment" data-fragment-index="12">involuntary action / conscious thought</td>
-    <td class="fragment" data-fragment-index="13">a token predicted</td>
+    <td class="fragment" data-fragment-index="12" style="font-size: 0.8em">conscious thought</td>
+    <td class="fragment" data-fragment-index="13" style="font-size: 0.8em">a token predicted</td>
   </tr>
 </table>
 
@@ -152,14 +152,14 @@ lets walk through a rough comparison of biological and artificial neural network
 
 –––––––––––––––––––––––––––––––––––––––––––––––
 
-What's a Transformer? How is it different?
+**What's a Transformer? How is it different?**
 
 Note: a transformer is a neural network, with the general architecture I just described. The difference between transformers and other text-centric neural networks is in how they process information in the intermediate layers.
 # down
 
 ----
 
-*"multi-head attention mechanism"*
+**"_multi-head attention mechanism_"**
 
 Note:
 Specifically, in the implementation of something called
@@ -169,14 +169,14 @@ which we'll explore deeper in a few slides.
 
 –––––––––––––––––––––––––––––––––––––––––––––––
 
-Chatbot example (at a very high level)
+**Chatbot example (at a very high level)**
 
 Note:
 let's walk through each step of the transformer model at a macro level, using the example of a chatbot powered by GPT-2, which was released in 2019.
 
 ----
 
-input text:
+**input text:**
 
 "The power clapper"<!-- .element: class="fragment fade-up" data-fragment-index="1" -->
 
@@ -184,7 +184,7 @@ Note:
 
 ----
 
-processing through the input, intermediate, and output layers
+**processing through the input, intermediate, and output layers**
 
 Note:
 we get the 1 token with the highest probability.
@@ -195,11 +195,11 @@ lets say we get -
 
 ----
 
-<span class="fragment" data-fragment-index="1">The power clapper + </span>
-went
-<span class="fragment" data-fragment-index="3">straight</span>
-<span class="fragment" data-fragment-index="5">to</span>
-<span class="fragment" data-fragment-index="7">jial</span>
+**<span class="fragment" data-fragment-index="1">The power clapper + </span>**
+**went**
+**<span class="fragment" data-fragment-index="3">straight</span>**
+**<span class="fragment" data-fragment-index="5">to</span>**
+**<span class="fragment" data-fragment-index="7">jial</span>**
 
 <span class="fragment fade-in-then-out" data-fragment-index="2">are fed back in. </span>
 <span class="fragment fade-in-then-out" data-fragment-index="4">are fed back in. </span>
@@ -229,14 +229,14 @@ are fed back in.
 
 –––––––––––––––––––––––––––––––––––––––––––––––
 
-Chatbot example (more detailed)
+**Chatbot example (more detailed)**
 
 Note:
 lets walk through that in detail, using the example of a chatbot powered by GPT-2, which was released in 2019.
 
 ----
 
-## GPT-2
+**GPT-2**
 ```py [1|3|4|5|6|7]
 # The model's own (hyper)parameters
     return HParams(
@@ -276,21 +276,21 @@ Note:
 
 ----
 
-input:
+**input:**
 
-"The power clapper"
+**"The power clapper"**
 
 ----
 
-tokenization:
+**tokenization:**
 
-"the",<!-- .element: class="fragment" data-fragment-index="1" -->
+**"the",<!-- .element: class="fragment" data-fragment-index="1" -->**
 
-"power",<!-- .element: class="fragment" data-fragment-index="2" -->
+**"power",<!-- .element: class="fragment" data-fragment-index="2" -->**
 
-"clap",<!-- .element: class="fragment" data-fragment-index="3" -->
+**"clap",<!-- .element: class="fragment" data-fragment-index="3" -->**
 
-"per"<!-- .element: class="fragment" data-fragment-index="3" -->
+**"per"<!-- .element: class="fragment" data-fragment-index="3" -->**
 
 Note:
 
@@ -299,7 +299,7 @@ Long words are broken down into shorter tokens.
 
 ----
 
-tokens => embeddings
+**tokens => embeddings**
 
 <div style="font-size: 0.6em">
 "we convert the token to a dense vector representation using the embedding matrix"<!-- .element: class="fragment fade-in-then-semi-out" data-fragment-index="1" -->
@@ -323,7 +323,7 @@ It’s the same thing.
 
 ----
 
-embeddings:
+**embeddings:**
 
 <div>"The":<!-- .element: class="fragment fade-up" data-fragment-index="1" --></div>
 <div style="font-size: 0.11em" class="fragment fade-up" data-fragment-index="1">
@@ -572,7 +572,7 @@ Self-Attention Mechanism
 
 ----
 
-Heads
+**Heads**
 
 <div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="1">const head1embeds = selfAttention(embeddings, head1Weights, d_k)</sup></div>
 <div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="2">const head2embeds = selfAttention(embeddings, head2Weights, d_k)</sup>  </div>
@@ -593,7 +593,7 @@ The values from each head are then synthesized into a single set of embeddings y
 
 ----
 
-<div style="font-size: 0.6em">synthesize the output from all heads, returning a single set of embeddings once again</div>
+<div style="font-size: 0.6em; font-weight: bold">synthesize the output from all heads, returning a single set of embeddings once again</div>
 
 ```javascript
 const heads = [
@@ -617,7 +617,7 @@ function multiHeadAttention(heads, W_Output) {
 
 ```javascript
 const outputEmbeds = multiHeadAttention(heads, W_Output);
-// ->
+// =>
 /* The: [ 0.774, -2.616, -0.571 ],
    power: [ 2.105, 0.639, 0.896 ],
    clap: [ -2.399, -1.685, 1.412 ],
@@ -627,7 +627,7 @@ const outputEmbeds = multiHeadAttention(heads, W_Output);
 
 ----
 
-repeat for each intermediate layer
+**repeat for each intermediate layer**
 
 <div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="1">layer<sup>1 outputEmbeds</sup> => layer<sup>2 inputEmbeds</sup></div>
 <div style="font-size: 0.7em" class="fragment fade-in-then-semi-out" data-fragment-index="2">layer<sup>2 outputEmbeds</sup> => layer<sup>3 inputEmbeds</sup>  </div>
@@ -647,9 +647,9 @@ in the case of gpt 2, that's 12 layers.
 
 ----
 
-output layer
+**output layer**
 
-<span class="fragment fade-in" data-fragment-index="1">predictToken(layer<sup>12 outputEmbeds</sup>) </span>
+**<span class="fragment fade-in" data-fragment-index="1">predictToken(layer<sup>12 outputEmbeds</sup>) </span>**
 
 Note:
 
@@ -660,13 +660,13 @@ In this case, we get"
 
 ----
 
-*<span style="font-size: 0.65em" class="fragment" data-fragment-index="1">repeat all prior steps until we reach the context window limit or a special stop token</span>*
+**<span style="font-size: 0.65em" class="fragment" data-fragment-index="1">_repeat all prior steps until we reach the context window limit or a special stop token_</span>**
 
-<span class="fragment" data-fragment-index="2"> The power clap per + </span>
-went
-<span class="fragment" data-fragment-index="3">straight</span>
-<span class="fragment" data-fragment-index="4">to</span>
-<span class="fragment" data-fragment-index="5">jial</span>
+**<span class="fragment" data-fragment-index="2"> The power clap per + </span>**
+**went**
+**<span class="fragment" data-fragment-index="3">straight</span>**
+**<span class="fragment" data-fragment-index="4">to</span>**
+**<span class="fragment" data-fragment-index="5">jial</span>**
 
 Note:
 which in gpt 2 is 1024 tokens,
@@ -689,13 +689,14 @@ I hope you enjoyed the presentation and learned something new.
 
 –––––––––––––––––––––––––––––––––––––––––––––––
 
-Works Cited
-<div style="width: 100%; font-size: 0.6em">
-<a href="https://arxiv.org/abs/1706.03762">"Attention Is All You Need" by Vaswani et al. <a style="font-size: 0.6em"> (the Transformer whitepaper)</a></a>
+**Works Cited**
 
-<a href="https://github.com/openai/gpt-2/blob/master/src/model.py">GPT-2 on Github</a>
+**<div style="width: 100%; font-size: 0.6em">**
+**<a href="https://arxiv.org/abs/1706.03762">"Attention Is All You Need" by Vaswani et al. <a style="font-size: 0.6em"> (the Transformer whitepaper)</a></a>**
 
-<a href="https://arxiv.org/abs/2005.14165">"Language Models are Few-Shot Learners" by Wu et al. <a style="font-size: 0.6em"> (GPT-3 unofficial whitepaper)</a></a>
+**<a href="https://github.com/openai/gpt-2/blob/master/src/model.py">GPT-2 on Github</a>**
+
+**<a href="https://arxiv.org/abs/2005.14165">"Language Models are Few-Shot Learners" by Wu et al. <a style="font-size: 0.6em"> (GPT-3 unofficial whitepaper)</a></a>**
 </div>
 
 Note:
@@ -703,9 +704,9 @@ here are my works cited
 
 –––––––––––––––––––––––––––––––––––––––––––––––
 
-github: <a href="Https://github.com/keithgibson">@keithgibson</a>
+**github: <a href="Https://github.com/keithgibson">@keithgibson</a>**
 
-linkedin: <a href="Https://linkedin.com/in/keithrgibson">@keithrgibson</a>
+**linkedin: <a href="Https://linkedin.com/in/keithrgibson">@keithrgibson</a>**
 
 Note:
 you can find me here
