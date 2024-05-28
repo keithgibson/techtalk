@@ -27,20 +27,20 @@ export default [
       }),
     ]
   },
-  {
-    input: 'interactiveNodes.js',
-    output: {
-      file: 'bundle_interactive.js',
-      format: 'iife',
-      name: 'bundle_interactive',
-      globals: {
-        'https://cdn.skypack.dev/zdog': 'Zdog',
-        'https://cdn.skypack.dev/d3-force-3d': 'd3Force3d',
-      },
-    },
-    plugins: [
-      resolve(),
-      commonjs(),
-    ]
-  }
+  // {
+  //   input: 'interactiveNodes.js',
+  //   output: {
+  //     file: 'bundle_interactive.js',
+  //     format: 'iife',
+  //     name: 'bundle_interactive',
+  //     globals: {
+  //       'https://cdn.skypack.dev/zdog': 'Zdog',
+  //       'https://cdn.skypack.dev/d3-force-3d': 'd3Force3d',
+  //     },
+  //   },
+  //   plugins: [
+  //     resolve(),
+  //     commonjs(),
+  //   ]
+  // }
 ];

@@ -4471,58 +4471,6 @@
 	  },
 	});
 
-	// Generate random nodes and space them out reasonably randomly
-	const NODES = new Array(850)
-	  .fill(null)
-	  .map((_, i) => new Node(
-	    i,
-	    {
-	      x: Math.random() * 400 - 200,
-	      y: Math.random() * 400 - 200,
-	      z: Math.random() * 400 - 200
-	    }
-	  ));
-
-	// Easier ways to access nodes quickly
-	const NODE_MAP = new Map(NODES.map(n => [n.id, n]));
-	const NODE_IDS = Array.from(NODE_MAP.keys());
-
-	// Generate links with some "clustering" structure
-	const LINKS = new Array(150).fill(null).flatMap(() => {
-	  // Choose a random start node
-	  const startNodeId = NODE_IDS[Math.floor(Math.random() * NODE_IDS.length)];
-	  // Link the start node to one or more end nodes.
-	  // One outgoing link will be way more likely than
-	  // 10+ outgoing links by using Math.pow distribution
-	    return new Array(Math.ceil(Math.pow(Math.random() * 1.8, 4)))
-	      .fill(null)
-	      .map(() => new Link(
-	        startNodeId,
-	        NODE_IDS[Math.floor(Math.random() * NODE_IDS.length)]
-	      ));
-	  });
-	//   const numLinks = Math.ceil(Math.pow(Math.random() * 1.8, 4));
-	//   return new Array(numLinks)
-	//     .fill(null)
-	//     .map(() => new Link(
-	//       startNodeId,
-	//       NODE_IDS[Math.floor(Math.random() * NODE_IDS.length)]
-	//     ));
-	// })
-	//   .filter((link, i, links) => {
-	//     // Make sure each node has a minimum of two links
-	//     const nodeId = link.sourceId === link.targetId ? link.sourceId : link.targetId;
-	//     const nodeLinks = links.filter(l => l.sourceId === nodeId || l.targetId === nodeId);
-	//     return nodeLinks.length >= 2;
-	//   });
-
-
-
-	// Apply 3d force-directed layout using D3.js
-	forceSimulation(NODES, 1.5)
-	  .force("link", forceLink(LINKS).id(d => d.id))
-	  .force("charge", forceManyBody());
-
 
 	// // Converts an alpha value [0,1] to a hex string
 	// // for appending to a hex color string
@@ -4551,7 +4499,8 @@
 	      i,
 	      {
 	        x: Math.random() * nodeSpacing - nodeSpacing / 2,
-	        y: Math.random() * nodeSpacing - nodeSpacing / 2,
+	        // y: Math.random() * nodeSpacing - nodeSpacing / 2,
+	        y: Math.random() * (nodeSpacing / 2) - nodeSpacing / 2,
 	        z: Math.random() * nodeSpacing - nodeSpacing / 2
 	      }
 	    ));
@@ -4594,9 +4543,9 @@
 	    // ILLO.rotate.y += rotationSpeed.y;
 	    // ILLO.rotate.x += rotationSpeed.x;
 	    // ILLO.rotate.z += rotationSpeed.z;
-	    ILLO.rotate.y += 0.0001;
-	    ILLO.rotate.x += 0.0002;
-	    ILLO.rotate.z += 0.00015;
+	    ILLO.rotate.y += 0.0001 + Math.random() < 0.5 ? -Math.random() * 1e-5 : Math.random() * 1e-5;
+	    ILLO.rotate.x += 0.0001;
+	    ILLO.rotate.z += 0.0001;
 
 	    ILLO.updateRenderGraph();
 	    requestAnimationFrame(() => animate());
@@ -4604,6 +4553,6 @@
 	  animate();
 	}
 
-	createIllustration({ numNodes: 100, numLinks: 0 });
+	createIllustration({ numNodes: 25, numLinks: 0 });
 
 })();

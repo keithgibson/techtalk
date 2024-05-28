@@ -1,3 +1,3 @@
 import { createIllustration } from "./neuralNetworkAnimation.js";
 
-createIllustration({ numNodes: 100, numLinks: 0 });
+createIllustration({ numNodes: 25, numLinks: 0 });

@@ -112,6 +112,7 @@ function hideNode2() {
 
 let clickCount = 0;
 function handleClick() {
+  console.log('handleClick called');
 
   // console.log('clickCount = ' + clickCount);
   if (clickCount === 0) {
@@ -138,8 +139,10 @@ function handleClick() {
 
 // Start the animation
 // createIllustration({ numNodes: 100, numLinks: 0 });
-animateNode();
-showNode1();
+// animateNode();
+// showNode1();
+animate();
 
-// Add event listener to the page
-document.addEventListener("click", handleClick);
+// document.addEventListener("DOMContentLoaded", function() {
+//   document.addEventListener("click", handleClick);
+// });
