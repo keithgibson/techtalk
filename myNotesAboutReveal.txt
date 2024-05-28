@@ -1,0 +1,8 @@
+- spacebar: step through both vertical and horizontal slides
+- shift + spacebar : reverse ^
+- b: make screen black
+- f: full screen
+- g: jump to slide #
+- jkl; : navigation
+- o: show overview of all slides
+- s: show speaker notes

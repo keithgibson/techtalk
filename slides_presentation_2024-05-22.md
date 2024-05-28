@@ -310,8 +310,8 @@ embeddings:
 
 embeddings:
 
-"The":<!-- .element: class="fragment fade-up-then-out" data-fragment-index="3" -->
-<div style="font-size: 0.1em">
+"The":<!-- .element: class="fragment fade-up-then-out" data-fragment-index="2" -->
+<div style="font-size: 0.11em" class="fragment fade-up" data-fragment-index="2">
   [ -1.228084989880871, 0.7331303424681268, -0.31621513108079213, 3.1979479873077885,
   2.168531500398558, -0.24906143658303126, -1.5775041584541172, -2.5750147547274893,
   1.8264231424899657, 4.448246216443945, 4.616339993884374, -1.3465269175726058,
