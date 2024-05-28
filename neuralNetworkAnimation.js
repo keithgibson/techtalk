@@ -304,9 +304,9 @@ function createIllustration(options, stopAnimation = false) {
     // ILLO.rotate.y += rotationSpeed.y;
     // ILLO.rotate.x += rotationSpeed.x;
     // ILLO.rotate.z += rotationSpeed.z;
-    ILLO.rotate.y += 0.0001 + Math.random() < 0.5 ? -Math.random() * 1e-5 : Math.random() * 1e-5;
-    ILLO.rotate.x += 0.0001;
-    ILLO.rotate.z += 0.0001;
+    ILLO.rotate.y = 0.00015 + Math.random() < 0.5 ? -Math.random() * 1e-5 : Math.random() * 1e-5;
+    ILLO.rotate.x = 0.00015 + Math.random() < 0.5 ? -Math.random() * 1e-5 : Math.random() * 1e-5;
+    ILLO.rotate.z = 0.00015 + Math.random() < 0.5 ? -Math.random() * 1e-5 : Math.random() * 1e-5;
 
     ILLO.updateRenderGraph();
     requestAnimationFrame(() => animate(stopAnimation));
